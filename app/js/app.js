@@ -5,8 +5,12 @@ var app = angular.module('softUniApp', ['ngResource', 'ngRoute'])
 		controller: 'AllAdsController'
 	});
 	$routeProvider.when('/login', {
-		templateUrl: 'templates/newAd.html',
-		controller: 'AdDetailsController'
+		templateUrl: 'templates/login.html',
+		controller: 'loginController'
+	});
+	$routeProvider.when('/register', {
+		templateUrl: 'templates/register.html',
+		controller: 'registerController'
 	});
 	$routeProvider.otherwise({
 		templateUrl: 'templates/allAds.html',
