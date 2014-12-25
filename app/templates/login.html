@@ -1,0 +1,23 @@
+<div class="col-md-3">
+	<div class="dialog-box" id="welcome">
+		<h1>To publish new ad, please login</h1>
+		<a href="/login" class="button">Login</a>
+		<a href="#" class="button" onclick="registerPage()">Register</a>
+	</div>
+</div>
+	<div id="login-form" class="dialog-box">
+		<h1>Login</h1>
+		<p>
+			<label for="username">Username:</label>
+			<input type="text" id="user" />
+		</p>
+		<p>
+			<label for="password">Password:</label>
+			<input type="password" id="pass" />
+		</p>
+		<p class="buttons">
+			<a href="#" class="button" onclick="login($('#user').val(),$('#pass').val())">Login</a>
+			<a href="#" class="link" onclick="registerPage()">Register</a>
+		<p>
+	</div>
+
