@@ -7,21 +7,32 @@
 </div>
 <div id="register-form" class="dialog-box">
 	<h1>Register</h1>
+<form>
 	<p>
 		<label for="username">Username:</label>
-		<input type="text" id="username" />
+		<input ng-model="myForm.username" type="text" id="username" />
 	</p>
 	<p>
 		<label for="password">Password:</label>
-		<input type="password" id="password" />
+		<input ng-model="myForm.password" type="password" id="password" />
 	</p>
 	<p>
 		<label for="fullName">Full Name:</label>
-		<input type="text" id="fullName" />
+		<input ng-model="myForm.name" type="text" id="fullName" />
+	</p>
+	<p>
+		<label for="fullName">Email:</label>
+		<input ng-model="myForm.email" type="text" id="fullName" />
+	</p>
+	<p>
+		<label for="fullName">Phone:</label>
+		<input ng-model="myForm.phone" type="text" id="fullName" />
 	</p>
 	<p class="buttons">
-		<a href="#" class="button">Register</a>
+		<a href="#" ng-click="myForm.submitTheForm()" class="button">Register</a>
 		<a href="/login" class="link">Login</a>
 	</p>
+</form>
+
 </div>
 
