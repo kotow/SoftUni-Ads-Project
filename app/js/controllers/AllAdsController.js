@@ -1,4 +1,4 @@
-app.controller('AllAdsController', function($scope, adsData, $log) {
+app.controller('AllAdsController', function($scope, adsData, $log, $http) {
 	adsData.getAll()
 		.$promise
 		.then(function (data) {
@@ -6,4 +6,20 @@ app.controller('AllAdsController', function($scope, adsData, $log) {
 		}, function (error) {
 			$log.error(error);
 		})
+	var responsePromise = $http.get("http://softuni-ads.azurewebsites.net/api/categories", {});
+       responsePromise.success(function(dataFromServer) {
+          console.log(dataFromServer);
+		  $scope.categories = dataFromServer;
+       });
+        responsePromise.error(function(data, status, headers, config) {
+          alert("Submitting form failed!");
+       });
+	var responsePromiseTowns = $http.get("http://softuni-ads.azurewebsites.net/api/towns", {});
+       responsePromiseTowns.success(function(dataFromServer) {
+          console.log(dataFromServer);
+		  $scope.towns = dataFromServer;
+       });
+        responsePromiseTowns.error(function(data, status, headers, config) {
+          alert("Submitting form failed!");
+       });
 });
