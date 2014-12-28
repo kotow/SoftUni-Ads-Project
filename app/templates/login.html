@@ -10,11 +10,11 @@
 	<form>
 	<p>
 		<label for="username">Username:</label>
-		<input ng-model="myForm.username" type="text" id="username" />
+		<input required ng-model="myForm.username" type="text" id="username" />
 	</p>
 	<p>
 		<label for="password">Password:</label>
-		<input ng-model="myForm.password" type="password" id="password" />
+		<input ng-model="myForm.password" type="password" required id="password" />
 	</p>
 	<p class="buttons">
 		<a href="#"  ng-click="myForm.submitTheForm()" class="button">Login</a>

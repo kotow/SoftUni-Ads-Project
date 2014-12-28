@@ -1,0 +1,40 @@
+<div class="col-md-3">
+	<div class="dialog-box" id="welcome">
+		<h1>Navigation</h1>
+		<a href="" class="button">Home</a></br>
+		<a href="" class="button" >My Ads</a></br>
+		<a href="/publish" class="button">Publish New Ad</a></br>
+		<a href="" class="button" >Edit Profile</a>
+	</div>
+</div>
+<div id="register-form" class="dialog-box">
+	<h1>Publish New Ad</h1>
+<form>
+	<p>
+		<label for="username">Title:</label>
+		<input ng-model="myForm.title" type="text" id="title" />
+	</p>
+	<p>
+		<label for="password">Text:</label>
+		<textarea ng-model="myForm.text" id="text"></textarea>
+	</p>
+	<p>
+	Category:
+					<select ng-model="myForm.categoryId">
+						<option selected value="">All</option>
+						<option ng-repeat="cat in categories" value="{{cat.id}}">{{cat.name}}</option>
+					</select>
+					Town:
+					<select ng-model="myForm.townId">
+					<option selected value="">All</option>
+						<option ng-repeat="town in towns" value="{{town.id}}">{{town.name}}</option>
+					</select>
+	</p>
+	<p class="buttons">
+		<a href="#" ng-click="myForm.submitTheForm()" class="button">Publish</a>
+		<a href="/login" class="link">Cancel</a>
+	</p>
+</form>
+
+</div>
+

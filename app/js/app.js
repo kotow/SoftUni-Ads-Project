@@ -12,6 +12,14 @@ var app = angular.module('softUniApp', ['ngResource', 'ngRoute'])
 		templateUrl: 'templates/register.html',
 		controller: 'registerController'
 	});
+	$routeProvider.when('/user', {
+		templateUrl: 'templates/user/home.html',
+		controller: 'AllAdsController'
+	});
+	$routeProvider.when('/publish', {
+		templateUrl: 'templates/user/publish.html',
+		controller: 'PublishNewAd'
+	});
 	$routeProvider.otherwise({
 		templateUrl: 'templates/allAds.html',
 		controller: 'AllAdsController'
