@@ -21,7 +21,7 @@ var app = angular.module('softUniApp', ['ngResource', 'ngRoute'])
 		controller: 'PublishNewAd'
 	});
 	$routeProvider.when('/userAds', {
-		templateUrl: 'templates/user/home.html',
+		templateUrl: 'templates/user/userAds.html',
 		controller: 'UserAdsController'
 	});
 	$routeProvider.otherwise({
