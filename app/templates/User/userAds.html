@@ -14,9 +14,9 @@
 		<a href="" class="button" >Inactive</a></br>
 		<a href="" class="button" >Rejected</a>
 	</div>
+<div class="col-md-9">
 </div>
-<div class="col-md-6">
-	<div class="dialog-box" ng-repeat="ad in data.ads | filter:filterBy | filter:filterByTown" style="width:100%">
+	<div class="dialog-box" ng-repeat="ad in data.ads" style="width:100%">
 		<a href="ads/{{ad.id}}">
 			<h1>{{ad.title}}	{{ad.date | date:'dd-MMM-yyyy'}}</h1>
 			<img src="" ng-src="{{ad.imageDataUrl}}"/>
@@ -26,16 +26,4 @@
 			<div><strong>Status:</strong> {{ad.status}}</div>
 		</a>
 	</div>
-</div>
-<div class="col-md-3">
-	Category:
-					<select ng-model="filterByTown.categoryId">
-						<option selected value="">All</option>
-						<option ng-repeat="cat in categories" value="{{cat.id}}">{{cat.name}}</option>
-					</select>
-					Town:
-					<select ng-model="filterBy.townId">
-					<option selected value="">All</option>
-						<option ng-repeat="town in towns" value="{{town.id}}">{{town.name}}</option>
-					</select>
 </div>
