@@ -17,13 +17,18 @@
 </div>
 <div class="col-md-9">
 	<div class="dialog-box" ng-repeat="ad in data.ads" style="width:100%">
-		<a href="ads/{{ad.id}}">
+		<a href="delete/{{ad.id}}">
 			<h1>{{ad.title}}	{{ad.date | date:'dd-MMM-yyyy'}}</h1>
 			<img src="" ng-src="{{ad.imageDataUrl}}"/>
 			<div>{{ad.text}}</div>
 			<div><strong>Category:</strong> {{ad.categoryName}}</div>
 			<div><strong>Town:</strong> {{ad.townName}}</div>
-			<div><strong>Status:</strong> {{ad.status}}</div>
+			<div><strong>Status:</strong>{{ad.id}} {{ad.status}}</div>
 		</a>
+		<a href="" class="button" >Edit</a>
+		<a href="" class="button">Re</a>
+		<a ng-href="/delete/{{ad.id}}" class="button" >Delete</a>
+		<a href="" class="button" >Deactivate</a>
+	
 	</div>
 </div>

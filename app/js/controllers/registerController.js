@@ -5,7 +5,7 @@ app.controller('registerController', function($scope, $http, $location) {
        var dataObject = {
 	   username: $scope.myForm.username,
 	   password:$scope.myForm.password,
-	   confirmPassword:$scope.myForm.password + 'a',
+	   confirmPassword:$scope.myForm.password,
 	   name:$scope.myForm.name,
 	   email:$scope.myForm.email,
 	   phone:$scope.myForm.phone,
