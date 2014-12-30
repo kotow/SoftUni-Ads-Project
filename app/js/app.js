@@ -24,7 +24,7 @@ var app = angular.module('softUniApp', ['ngResource', 'ngRoute'])
 		templateUrl: 'templates/user/userAds.html',
 		controller: 'UserAdsController'
 	});
-	$routeProvider.when('/delete/:adId', {
+	$routeProvider.when('/:adId', {
 		templateUrl: 'templates/user/delete.html',
 		controller: 'DeleteAdController'
 	});
