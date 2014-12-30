@@ -5,7 +5,7 @@
 			<div>{{ad.text}}</div>
 			<div><strong>Name:</strong> {{ad.ownerName}}</div>
 			<div><strong>Email:</strong> {{ad.ownerEmail}}</div>
-			<div><strong>Phone:</strong> {{ad.id}}{{ad.ownerPhone}}</div>
-			<a href="" onclick="delete()" class="button" >Delete</a>
+			<div><strong>Phone:</strong> {{ad.id}}{{deleteAd}}</div>
+			<a href="" ng-click="deleteAd()" class="button" >Delete</a>
 	</div>
 </div>
