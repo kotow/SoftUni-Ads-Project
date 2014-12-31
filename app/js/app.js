@@ -1,5 +1,6 @@
 var app = angular.module('softUniApp', ['ngResource', 'ngRoute'])
 .config(function ($routeProvider, $locationProvider) {
+	$locationProvider.html5Mode(true);
 	$routeProvider.when('/ads', {
 		templateUrl: 'templates/allAds.html',
 		controller: 'AllAdsController'
@@ -24,7 +25,7 @@ var app = angular.module('softUniApp', ['ngResource', 'ngRoute'])
 		templateUrl: 'templates/user/userAds.html',
 		controller: 'UserAdsController'
 	});
-	$routeProvider.when('/:adId', {
+	$routeProvider.when('/a/:adId', {
 		templateUrl: 'templates/user/delete.html',
 		controller: 'DeleteAdController'
 	});
@@ -32,5 +33,4 @@ var app = angular.module('softUniApp', ['ngResource', 'ngRoute'])
 		templateUrl: 'templates/allAds.html',
 		controller: 'AllAdsController'
 	});
-	$locationProvider.html5Mode(true);
 });
