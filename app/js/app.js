@@ -1,3 +1,15 @@
+var loginRequired = function($location, $q) {  
+    var deferred = $q.defer();
+
+    if(! userSession.getCurrentUser()) {
+        deferred.reject()
+        $location.path('/login');
+    } else {
+        deferred.resolve()
+    }
+
+    return deferred.promise;
+}
 var app = angular.module('softUniApp', ['ngResource', 'ngRoute'])
 .config(function ($routeProvider, $locationProvider) {
 	$locationProvider.html5Mode(true);
@@ -15,19 +27,23 @@ var app = angular.module('softUniApp', ['ngResource', 'ngRoute'])
 	});
 	$routeProvider.when('/user', {
 		templateUrl: 'templates/user/home.html',
-		controller: 'AllAdsController'
+		controller: 'AllAdsController',
+		resolve: { loginRequired: loginRequired }
 	});
 	$routeProvider.when('/publish', {
 		templateUrl: 'templates/user/publish.html',
-		controller: 'PublishNewAd'
+		controller: 'PublishNewAd',
+		resolve: { loginRequired: loginRequired }
 	});
 	$routeProvider.when('/userAds', {
 		templateUrl: 'templates/user/userAds.html',
-		controller: 'UserAdsController'
+		controller: 'UserAdsController',
+		resolve: { loginRequired: loginRequired }
 	});
 	$routeProvider.when('/a/:adId', {
 		templateUrl: 'templates/user/delete.html',
-		controller: 'DeleteAdController'
+		controller: 'DeleteAdController',
+		resolve: { loginRequired: loginRequired }
 	});
 	$routeProvider.otherwise({
 		templateUrl: 'templates/allAds.html',
