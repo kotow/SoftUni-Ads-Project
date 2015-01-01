@@ -1,0 +1,11 @@
+<div class="col-md-6">
+	<div class="dialog-box">
+			<h1>{{ad.title}}	{{ad.date | date:'dd-MMM-yyyy'}}</h1>
+			<img src="" ng-src="{{ad.imageDataUrl}}"/>
+			<div>{{ad.text}}</div>
+			<div><strong>Name:</strong> {{ad.ownerName}}</div>
+			<div><strong>Email:</strong> {{ad.ownerEmail}}</div>
+			<div><strong>Phone:</strong> {{ad.id}}{{deleteAd}}</div>
+			<a href="" ng-click="publishAgain()" class="button" >Publish Again</a>
+	</div>
+</div>

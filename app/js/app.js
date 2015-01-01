@@ -65,6 +65,11 @@ var app = angular.module('softUniApp', ['ngResource', 'ngRoute'])
 		controller: 'DeactivateAdController',
 		resolve: { loginRequired: loginRequired }
 	});
+	$routeProvider.when('/publishagain/:adId', {
+		templateUrl: 'templates/user/rePublish.html',
+		controller: 'PublishAgainAdController',
+		resolve: { loginRequired: loginRequired }
+	});
 	$routeProvider.otherwise({
 		templateUrl: 'templates/allAds.html',
 		controller: 'AllAdsController',
