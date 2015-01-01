@@ -23,8 +23,7 @@ var loginNotRequired = function($location, $q) {
     return deferred.promise;
 }
 var app = angular.module('softUniApp', ['ngResource', 'ngRoute'])
-.config(function ($routeProvider, $locationProvider) {
-	//$locationProvider.html5Mode(true);
+.config(function ($routeProvider) {
 	$routeProvider.when('/ads', {
 		templateUrl: 'templates/allAds.html',
 		controller: 'AllAdsController',

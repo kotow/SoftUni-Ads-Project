@@ -5,11 +5,11 @@ app.controller('registerController', function($scope, $http, $location) {
        var dataObject = {
 	   username: $scope.myForm.username,
 	   password:$scope.myForm.password,
-	   confirmPassword:$scope.myForm.password,
+	   confirmPassword:$scope.myForm.passwordConf,
 	   name:$scope.myForm.name,
 	   email:$scope.myForm.email,
 	   phone:$scope.myForm.phone,
-	   townId:1
+	   townId:$scope.myForm.townId
 	   };
 
        var responsePromise = $http.post("http://softuni-ads.azurewebsites.net/api/user/register", dataObject, {});
@@ -22,4 +22,13 @@ app.controller('registerController', function($scope, $http, $location) {
           alert("Submitting form failed!");
        });
 	}
+	var responsePromiseTowns = $http.get("http://softuni-ads.azurewebsites.net/api/towns", {});
+       responsePromiseTowns.success(function(dataFromServer) {
+          console.log(dataFromServer);
+		  $scope.towns = dataFromServer;
+       });
+        responsePromiseTowns.error(function(data, status, headers, config) {
+          alert("Submitting form failed!");
+       });
+
 });

@@ -1,9 +1,10 @@
 <div class="col-md-3">
 	<div class="dialog-box" id="welcome">
 		<h1>Navigation</h1>
-		<a href="/user" class="button">Home</a></br>
-		<a href="/userAds" class="button" >My Ads</a></br>
-		<a href="/publish" class="button">Publish New Ad</a></br>
+		<input type="button" onclick="userSession.logout()" class="button" value="LogOut"/></br>
+		<a href="#/user" class="button">Home</a></br>
+		<a href="#/userAds" class="button" >My Ads</a></br>
+		<a href="#/publish" class="button">Publish New Ad</a></br>
 		<a href="" class="button" >Edit Profile</a>
 	</div>
 	<div class="dialog-box" id="welcome">
@@ -15,20 +16,18 @@
 		<a href="" class="button" >Rejected</a>
 	</div>
 </div>
+
 <div class="col-md-9">
 	<div class="dialog-box" ng-repeat="ad in data.ads" style="width:100%">
-		<a href="delete/{{ad.id}}">
-			<h1>{{ad.title}}	{{ad.date | date:'dd-MMM-yyyy'}}</h1>
-			<img src="" ng-src="{{ad.imageDataUrl}}"/>
-			<div>{{ad.text}}</div>
-			<div><strong>Category:</strong> {{ad.categoryName}}</div>
-			<div><strong>Town:</strong> {{ad.townName}}</div>
-			<div><strong>Status:</strong>{{ad.id}} {{ad.status}}</div>
-		</a>
+		<h1>{{ad.title}}	Date:{{ad.date | date:'dd-MMM-yyyy'}}</h1>
+		<img src="" ng-src="{{ad.imageDataUrl}}"/>
+		<div>{{ad.text}}</div>
+		<div><strong>Category:</strong> {{ad.categoryName}}</div>
+		<div><strong>Town:</strong> {{ad.townName}}</div>
+		<div><strong>Status:</strong>{{ad.id}} {{ad.status}}</div>
 		<a href="" class="button" >Edit</a>
 		<a href="/#/publishagain/{{ad.id}}" class="button">Re</a>
 		<a href="/#/delete/{{ad.id}}" class="button" target="_self" >Delete</a>
-		<a href="/#/deactivate/{{ad.id}}" class="button" >Deactivate</a>
-	
+		<a href="/#/deactivate/{{ad.id}}" class="button" >Deactivate</a>	
 	</div>
 </div>
