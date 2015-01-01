@@ -1,4 +1,4 @@
-app.controller('DeleteAdController', function($scope, adsData, $log, $http, $routeParams, $location) {
+app.controller('DeactivateAdController', function($scope, adsData, $log, $http, $routeParams, $location) {
 	$http.defaults.headers.common['Authorization'] = "Bearer " + userSession.getCurrentUser().access_token;
 	var responsePromise = $http.get("http://softuni-ads.azurewebsites.net/api/user/ads/"+$routeParams.adId, {});
         responsePromise.success(function(dataFromServer) {
@@ -8,8 +8,8 @@ app.controller('DeleteAdController', function($scope, adsData, $log, $http, $rou
         responsePromise.error(function(data, status, headers, config) {
           alert("Submitting form failed!");
         });
-	$scope.deleteAd =  function(){
-		var responsePromise = $http.put("http://softuni-ads.azurewebsites.net/api/user/ads/publishagain/"+$routeParams.adId, {});
+	$scope.deactivateAd =  function(){
+		var responsePromise = $http.put("http://softuni-ads.azurewebsites.net/api/user/ads/deactivate/"+$routeParams.adId, {});
         responsePromise.success(function(dataFromServer) {
          	$location.path( '/user' );
 			console.log(dataFromServer);

@@ -14,6 +14,7 @@ app.controller('registerController', function($scope, $http, $location) {
 
        var responsePromise = $http.post("http://softuni-ads.azurewebsites.net/api/user/register", dataObject, {});
        responsePromise.success(function(dataFromServer, status, headers, config) {
+		  userSession.login(dataFromServer);
           console.log(dataFromServer);
 		  $location.path( '/user' );
        });
