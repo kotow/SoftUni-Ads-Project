@@ -17,6 +17,11 @@
 	<p>
 		<label for="password">Text:</label>
 		<textarea ng-model="myForm.text" id="text"></textarea>
+	</p>	
+	<p>
+		<label for="picture">Picture:</label>
+		<input type="file" ng-model="myForm.picture" id="picture"/>
+		<img ng-src="myForm.picture"/>
 	</p>
 	<p>
 	Category:

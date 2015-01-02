@@ -1,7 +1,7 @@
 app.controller('PublishNewAd', function($scope, $http) {
 	$scope.myForm = {};
     $scope.myForm.submitTheForm = function(item, event) {
-		console.log($scope.myForm);
+		console.log($scope.myForm.picture);
 		$http.defaults.headers.common['Authorization'] = "Bearer " + userSession.getCurrentUser().access_token;
 		var dataObject = {
 			title: $scope.myForm.title,
