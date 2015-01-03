@@ -12,7 +12,7 @@
 	<div class="dialog-box" ng-repeat="ad in data.ads | filter:filterBy | filter:filterByTown" style="width:100%">
 		<a href="/#ads/{{ad.id}}">
 			<h1>{{ad.title}}	{{ad.date | date:'dd-MMM-yyyy'}}</h1>
-			<img src="" ng-src="{{ad.imageDataUrl}}"/>
+			<img src="" ng-src="{{ad.imageDataUrl}}" style="width:30%"/>
 			<div>{{ad.text}}</div>
 			<div><strong>Name:</strong> {{ad.ownerName}}</div>
 			<div><strong>Email:</strong> {{ad.ownerEmail}}</div>

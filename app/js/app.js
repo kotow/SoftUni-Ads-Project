@@ -74,6 +74,11 @@ var app = angular.module('softUniApp', ['ngResource', 'ngRoute'])
 		controller: 'EditAdController',
 		resolve: { loginRequired: loginRequired }
 	});
+	$routeProvider.when('/editprofile', {
+		templateUrl: 'templates/user/editprofile.html',
+		controller: 'EditProfileController',
+		resolve: { loginRequired: loginRequired }
+	});
 	$routeProvider.otherwise({
 		templateUrl: 'templates/allAds.html',
 		controller: 'AllAdsController',
