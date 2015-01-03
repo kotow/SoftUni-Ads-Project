@@ -19,6 +19,7 @@
 			<div><strong>Phone:</strong> {{ad.ownerPhone}}</div>
 		</a>
 	</div>
+	<pagination total-items="totalItems" ng-model="currentPage" items-per-page="itemsPerPage" ng-change="pageChanged()"></pagination>
 </div>
 <div class="col-md-3">
 	Category:
