@@ -79,6 +79,22 @@ var app = angular.module('softUniApp', ['ngResource', 'ngRoute'])
 		controller: 'EditProfileController',
 		resolve: { loginRequired: loginRequired }
 	});
+	$routeProvider.when('/admin/home', {
+		templateUrl: 'templates/admin/home.html',
+		controller: 'AdminAllAdsController',
+	});
+	$routeProvider.when('/admin/users/list', {
+		templateUrl: 'templates/admin/users.html',
+		controller: 'AdminAllUsersController',
+	});
+	$routeProvider.when('/admin/categories/list', {
+		templateUrl: 'templates/admin/categories.html',
+		controller: 'AdminAllCategoriesController',
+	});
+	$routeProvider.when('/admin/towns/list', {
+		templateUrl: 'templates/admin/towns.html',
+		controller: 'AdminAllTownsController',
+	});
 	$routeProvider.otherwise({
 		templateUrl: 'templates/allAds.html',
 		controller: 'AllAdsController',

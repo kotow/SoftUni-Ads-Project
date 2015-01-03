@@ -1,0 +1,19 @@
+<div class="col-md-3">
+	<div class="dialog-box" id="welcome">
+		<h1>Navigation</h1>
+		<input type="button" onclick="userSession.logout()" class="button" value="LogOut"/></br>
+		<a href="/#/admin/home" class="button">Ads</a></br>
+		<a href="/#/admin/users/list" class="button" >Users</a></br>
+		<a href="/#/admin/categories/list" class="button">Categories</a></br>
+		<a href="/#/admin/towns/list" class="button" >Towns</a>
+	</div>
+</div>
+	<table id="phones">
+		<tr>
+			<th>Id</th>
+			<th>Categorie</th>
+			<th>Action</th>
+		</tr>
+		<tr ng-repeat="town in towns"><td>{{town.id}}</td><td>{{town.name}}</td><td><a>Edit</a><a>Delete</a></td>
+	</table>
+	<p><a href="#" class="button">Add town</a></p>
