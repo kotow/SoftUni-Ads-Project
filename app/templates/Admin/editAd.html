@@ -1,0 +1,38 @@
+<div id="register-form" class="dialog-box">
+	<h1>Publish New Ad</h1>
+<form>
+	<p>
+		<label for="username">Title:</label>
+		<input ng-model="ad.title" type="text" id="title" ng-value="ad.title"/>
+	</p>
+	<p>
+		<label for="password">Text:</label>
+		<textarea ng-model="ad.text" id="text"></textarea>
+	</p>	
+	<p>
+        <label for="image">Image:</label>
+        <input type="file" id="image" ng-model="ad.imageDataUrl"
+               onchange="angular.element(this).scope().fileSelected(this)" />
+        <div class="image-box">
+            <p>Image Preview</p>
+        </div>
+    </p>
+	<p>
+	Category:
+					<select ng-model="ad.categoryId">
+						<option selected value="">All</option>
+						<option ng-repeat="cat in categories" value="{{cat.id}}">{{cat.name}}</option>
+					</select>
+					Town:
+					<select ng-model="ad.townId">
+					<option selected value="">All</option>
+						<option ng-repeat="town in towns" value="{{town.id}}">{{town.name}}</option>
+					</select>
+	</p>
+	<p class="buttons">
+		<a href ng-click="editAd()" class="button">Edit</a>
+		<a href="/login"  class="button">Cancel</a>
+	</p>
+</form>
+
+</div>

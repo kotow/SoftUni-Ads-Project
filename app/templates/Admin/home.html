@@ -20,7 +20,12 @@
 			<div><strong>Town:</strong> {{ad.townName}}</div>
 			<div><strong>Category:</strong> {{ad.categoryName}}</div>
 			<div><strong>Status:</strong> {{ad.status}}</div>
-			<div><a href class="button" ng-click="aprove(ad.id)">Approve</a><a href class="button" ng-click="reject(ad.id)">Reject</a></div>
+			<div>
+				<a href class="button" ng-click="aprove(ad.id)">Approve</a>
+				<a href class="button" ng-click="reject(ad.id)">Reject</a>
+				<a href="#/admin/ads/edit/{{ad.id}}" class="button">Edit</a>
+				<a href="#/admin/ads/delete/{{ad.id}}" class="button">Delete</a>
+			</div>
 	</div>
 </div>
 <div class="col-md-3">
