@@ -1,0 +1,33 @@
+<div id="register-form" class="dialog-box">
+	<h1>Edit profile</h1>
+<form>
+	<p>
+		<label for="userName">Username:</label>
+		<input value="{{myForm.username}}" type="text" disabled id="fullName" />
+	</p>
+	<p>
+		<label for="fullName">Full Name:</label>
+		<input ng-model="myForm.name" type="text" disabled id="fullName" />
+	</p>
+	<p>
+		<label for="fullName">Email:</label>
+		<input ng-model="myForm.email" type="text" disabled id="fullName" />
+	</p>
+	<p>
+		<label for="fullName">Phone:</label>
+		<input ng-model="myForm.phoneNumber" type="text" disabled id="fullName" />
+	</p>
+	<p>
+		<select ng-model="myForm.townId" disabled>
+			<option ng-repeat="town in towns" value="{{town.id}}">{{town.name}}</option>
+		</select>
+
+	</p>
+	<p class="buttons">
+		<a href onclick="submitTheForm()" class="button">Edit</a>
+		<a href="/#/" class="link">Cancel</a>
+	</p>
+</form>
+
+</div>
+

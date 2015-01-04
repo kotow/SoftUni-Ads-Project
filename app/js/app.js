@@ -123,6 +123,10 @@ var app = angular.module('softUniApp', ['ngResource', 'ngRoute'])
 		templateUrl: 'templates/admin/editUser.html',
 		controller: 'AdminEditUserController',
 	});
+	$routeProvider.when('/admin/users/delete/:userName', {
+		templateUrl: 'templates/admin/deleteUser.html',
+		controller: 'AdminDeleteUserController',
+	});
 	$routeProvider.otherwise({
 		templateUrl: 'templates/allAds.html',
 		controller: 'AllAdsController',
