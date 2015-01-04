@@ -99,6 +99,10 @@ var app = angular.module('softUniApp', ['ngResource', 'ngRoute'])
 		templateUrl: 'templates/admin/deletetown.html',
 		controller: 'DeleteTownController',
 	});
+	$routeProvider.when('/admin/towns/edit/:townId', {
+		templateUrl: 'templates/admin/editTown.html',
+		controller: 'EditTownController',
+	});
 	$routeProvider.when('/admin/towns/add', {
 		templateUrl: 'templates/admin/addtown.html',
 		controller: 'AddTownController',

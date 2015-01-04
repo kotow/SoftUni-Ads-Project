@@ -1,4 +1,4 @@
-app.controller('DeleteTownController', function($scope, adsData, $log, $http, $routeParams, $location) {
+app.controller('EditTownController', function($scope, adsData, $log, $http, $routeParams, $location) {
 	$http.defaults.headers.common['Authorization'] = "Bearer " + userSession.getCurrentUser().access_token;
 	var responsePromiseTowns = $http.get("http://softuni-ads.azurewebsites.net/api/towns", {});
 	responsePromiseTowns.success(function(dataFromServer) {
@@ -9,7 +9,11 @@ app.controller('DeleteTownController', function($scope, adsData, $log, $http, $r
 		}
 	  });
 	deleteTown = function(){
-		var responsePromise = $http.delete("http://softuni-ads.azurewebsites.net/api/admin/towns/"+$routeParams.townId);
+	var town = {
+		name:$scope.town.name
+	};
+	console.log(town);
+		var responsePromise = $http.put("http://softuni-ads.azurewebsites.net/api/admin/towns/"+$routeParams.townId, town);
 		responsePromise.success(function(dataFromServer) {
 			$location.path( '/admin/towns/list' );
 		});
