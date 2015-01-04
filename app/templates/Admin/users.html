@@ -17,6 +17,15 @@
 			<th>Phone</th>
 			<th>Action</th>
 		</tr>
-		<tr ng-repeat="user in users.users"><td>{{user.username}}</td><td>{{user.name}}</td><td>{{user.email}}</td><td>{{user.phoneNumber}}</td><td><a>Edit</a><a>Delete</a></td>
+		<tr ng-repeat="user in users.users">
+			<td>{{user.username}}</td>
+			<td>{{user.name}}</td>
+			<td>{{user.email}}</td>
+			<td>{{user.phoneNumber}}</td>
+			<td>
+				<a href="#/admin/users/edit/{{user.username}}">Edit</a>
+				<a>Delete</a>
+			</td>
+		</tr>
 	</table>
 </div>

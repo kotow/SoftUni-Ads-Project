@@ -119,6 +119,10 @@ var app = angular.module('softUniApp', ['ngResource', 'ngRoute'])
 		templateUrl: 'templates/admin/towns.html',
 		controller: 'AdminAllTownsController',
 	});
+	$routeProvider.when('/admin/users/edit/:userName', {
+		templateUrl: 'templates/admin/editUser.html',
+		controller: 'AdminEditUserController',
+	});
 	$routeProvider.otherwise({
 		templateUrl: 'templates/allAds.html',
 		controller: 'AllAdsController',

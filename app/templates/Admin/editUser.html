@@ -1,0 +1,55 @@
+<div id="register-form" class="dialog-box">
+	<h1>Edit profile</h1>
+<form>
+	<p>
+		<label for="userName">Username:</label>
+		<input value="{{myForm.username}}" type="text" disabled id="fullName" />
+	</p>
+	<p>
+		<label for="fullName">Full Name:</label>
+		<input ng-model="myForm.name" type="text" id="fullName" />
+	</p>
+	<p>
+		<label for="fullName">Email:</label>
+		<input ng-model="myForm.email" type="text" id="fullName" />
+	</p>
+	<p>
+		<label for="fullName">Phone:</label>
+		<input ng-model="myForm.phoneNumber" type="text" id="fullName" />
+	</p>
+	<p>
+		<select ng-model="myForm.townId">
+			<option ng-repeat="town in towns" value="{{town.id}}">{{town.name}}</option>
+		</select>
+
+	</p>
+	<p class="buttons">
+		<a href onclick="submitTheForm()" class="button">Edit</a>
+		<a href="/#/" class="link">Cancel</a>
+	</p>
+</form>
+
+</div>
+<div id="register-form" class="dialog-box">
+	<h1>Edit profile</h1>
+<form>
+	<p>
+		<label for="userName">Username:</label>
+		<input value="{{myForm.username}}" type="text" disabled id="fullName" />
+	</p>
+	<p>
+		<label for="fullName">New password:</label>
+		<input ng-model="pass.new" type="password" id="fullName" />
+	</p>
+	<p>
+		<label for="fullName">Confirm password:</label>
+		<input ng-model="pass.conf" type="password" id="fullName" />
+	</p>
+	<p class="buttons">
+		<a href onclick="changePass()" class="button">Edit password</a>
+		<a href="/#/" class="link">Cancel</a>
+	</p>
+</form>
+
+</div>
+
