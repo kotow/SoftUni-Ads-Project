@@ -1,9 +1,29 @@
 app.controller('EditAdController', function($scope, adsData, $log, $http, $routeParams, $location) {
 	$http.defaults.headers.common['Authorization'] = "Bearer " + userSession.getCurrentUser().access_token;
+var dataObject = {};
+
+	$scope.fileSelected = function(fileInputField) {
+	console.log(fileInputField.files[0]);
+            //delete $scope.adData.imageDataUrl;
+            var file = fileInputField.files[0];
+            if (file.type.match(/image\/.*/)) {
+                var reader = new FileReader();
+                reader.onload = function() {
+                    dataObject.imageDataUrl = reader.result;
+					dataObject.changeimage = true;
+                    $(".image-box").html("<img src='" + reader.result + "'>");
+                };
+                reader.readAsDataURL(file);
+            } else {
+                $(".image-box").html("<p>File type not supported!</p>");
+            }
+        }
+
+	
 	var responsePromise = $http.get("http://softuni-ads.azurewebsites.net/api/user/ads/"+$routeParams.adId, {});
         responsePromise.success(function(dataFromServer) {
-          //console.log(dataFromServer);
-		  $scope.ad = dataFromServer;
+		$(".image-box").html("<img src='" + dataFromServer.imageDataUrl + "'>");
+		$scope.ad = dataFromServer;
         });
         responsePromise.error(function(data, status, headers, config) {
           alert("Submitting form failed!");
@@ -26,13 +46,10 @@ app.controller('EditAdController', function($scope, adsData, $log, $http, $route
           alert("Submitting form failed!");
 	});
 $scope.editAd =  function(){
-		var dataObject = {
-			//imageDataUrl: $scope.ad.imageDataUrl,
-			title: $scope.ad.title,
-			text: $scope.ad.text,
-			categoryId: $scope.ad.categoryId,
-			townId: $scope.ad.townId,
-		};
+		dataObject.title = $scope.ad.title;
+			dataObject.text = $scope.ad.text;
+			dataObject.categoryId = $scope.ad.categoryId;
+			dataObject.townId = $scope.ad.townId;
 		var responsePromise = $http.put("http://softuni-ads.azurewebsites.net/api/user/ads/"+$routeParams.adId, dataObject);
         responsePromise.success(function(dataFromServer) {
          	//$location.path( '/user' );

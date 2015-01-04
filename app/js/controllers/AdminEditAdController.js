@@ -1,9 +1,28 @@
 app.controller('AdminEditAdController', function($scope, adsData, $log, $http, $routeParams, $location) {
 	$http.defaults.headers.common['Authorization'] = "Bearer " + userSession.getCurrentUser().access_token;
+
+	$scope.fileSelected = function(fileInputField) {
+	console.log(fileInputField.files[0]);
+            //delete $scope.adData.imageDataUrl;
+            var file = fileInputField.files[0];
+            if (file.type.match(/image\/.*/)) {
+                var reader = new FileReader();
+                reader.onload = function() {
+                    $scope.myForm.imageDataUrl = reader.result;
+					$scope.myForm.changeimage = true;
+                    $(".image-box").html("<img src='" + reader.result + "'>");
+                };
+                reader.readAsDataURL(file);
+            } else {
+                $(".image-box").html("<p>File type not supported!</p>");
+            }
+        }
+
+	
 	var responsePromise = $http.get("http://softuni-ads.azurewebsites.net/api/admin/ads/"+$routeParams.adId, {});
         responsePromise.success(function(dataFromServer) {
-          //console.log(dataFromServer);
-		  $scope.ad = dataFromServer;
+$(".image-box").html("<img src='" + dataFromServer.imageDataUrl + "'>");
+				  $scope.ad = dataFromServer;
         });
         responsePromise.error(function(data, status, headers, config) {
           alert("Submitting form failed!");
