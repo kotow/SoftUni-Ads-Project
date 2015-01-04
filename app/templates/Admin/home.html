@@ -10,7 +10,6 @@
 </div>
 <div class="col-md-6">
 	<div class="dialog-box" ng-repeat="ad in data.ads | filter:filterBy | filter:filterByTown" style="width:100%">
-		<a href="/#ads/{{ad.id}}">
 			<h1>{{ad.title}}	{{ad.date | date:'dd-MMM-yyyy'}}</h1>
 			<img src="" ng-src="{{ad.imageDataUrl}}" style="width:30%"/>
 			<div>{{ad.text}}</div>
@@ -21,9 +20,8 @@
 			<div><strong>Town:</strong> {{ad.townName}}</div>
 			<div><strong>Category:</strong> {{ad.categoryName}}</div>
 			<div><strong>Status:</strong> {{ad.status}}</div>
-		</a>
+			<div><a href class="button" ng-click="aprove(ad.id)">Approve</a><a href class="button" ng-click="reject(ad.id)">Reject</a></div>
 	</div>
-	<pagination total-items="totalItems" ng-model="currentPage" items-per-page="itemsPerPage" ng-change="pageChanged()"></pagination>
 </div>
 <div class="col-md-3">
 	Category:
