@@ -3,7 +3,7 @@ app.controller('DeleteAdController', function($scope, adsData, $log, $http, $rou
 	var responsePromise = $http.get("http://softuni-ads.azurewebsites.net/api/user/ads/"+$routeParams.adId, {});
         responsePromise.success(function(dataFromServer) {
           //console.log(dataFromServer);
-		  $scope.ad = dataFromServer;
+		  $scope.town = dataFromServer;
         });
         responsePromise.error(function(data, status, headers, config) {
           alert("Submitting form failed!");

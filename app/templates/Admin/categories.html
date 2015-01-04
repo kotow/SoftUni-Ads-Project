@@ -8,12 +8,14 @@
 		<a href="/#/admin/towns/list" class="button" >Towns</a>
 	</div>
 </div>
+<div class="col-md-9">
 	<table id="phones">
 		<tr>
 			<th>Id</th>
 			<th>Categorie</th>
 			<th>Action</th>
 		</tr>
-		<tr ng-repeat="town in towns"><td>{{town.id}}</td><td>{{town.name}}</td><td><a>Edit</a><a>Delete</a></td>
+		<tr ng-repeat="town in towns"><td>{{town.id}}</td><td>{{town.name}}</td><td><a>Edit</a><a href="#/admin/categories/delete/{{town.id}}">Delete</a></td>
 	</table>
-	<p><a href="#" class="button">Add town</a></p>
+	<p><a href="#" class="button">Add categorie</a></p>
+</div>

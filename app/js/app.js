@@ -91,6 +91,18 @@ var app = angular.module('softUniApp', ['ngResource', 'ngRoute'])
 		templateUrl: 'templates/admin/categories.html',
 		controller: 'AdminAllCategoriesController',
 	});
+	$routeProvider.when('/admin/categories/delete/:categoryId', {
+		templateUrl: 'templates/admin/categories.html',
+		controller: 'AdminAllCategoriesController',
+	});
+	$routeProvider.when('/admin/towns/delete/:townId', {
+		templateUrl: 'templates/admin/deletetown.html',
+		controller: 'DeleteTownController',
+	});
+	$routeProvider.when('/admin/towns/add', {
+		templateUrl: 'templates/admin/addtown.html',
+		controller: 'AddTownController',
+	});
 	$routeProvider.when('/admin/towns/list', {
 		templateUrl: 'templates/admin/towns.html',
 		controller: 'AdminAllTownsController',
