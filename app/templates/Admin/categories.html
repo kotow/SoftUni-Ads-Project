@@ -15,7 +15,14 @@
 			<th>Categorie</th>
 			<th>Action</th>
 		</tr>
-		<tr ng-repeat="town in towns"><td>{{town.id}}</td><td>{{town.name}}</td><td><a>Edit</a><a href="#/admin/categories/delete/{{town.id}}">Delete</a></td>
+		<tr ng-repeat="town in towns">
+			<td>{{town.id}}</td>
+			<td>{{town.name}}</td>
+			<td>	
+				<a href="#/admin/categories/edit/{{town.id}}">Edit</a>
+				<a href="#/admin/categories/delete/{{town.id}}">Delete</a>
+			</td>
+		</tr>
 	</table>
-	<p><a href="#" class="button">Add categorie</a></p>
+	<p><a href="#/admin/categories/add" class="button">Add categorie</a></p>
 </div>
