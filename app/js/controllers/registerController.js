@@ -1,7 +1,6 @@
 app.controller('registerController', function($scope, $http, $location) {
 	$scope.myForm = {};
     $scope.myForm.submitTheForm = function(item, event) {
-       console.log($scope.myForm);
        var dataObject = {
 	   username: $scope.myForm.username,
 	   password:$scope.myForm.password,
@@ -15,7 +14,6 @@ app.controller('registerController', function($scope, $http, $location) {
        var responsePromise = $http.post("http://softuni-ads.azurewebsites.net/api/user/register", dataObject, {});
        responsePromise.success(function(dataFromServer, status, headers, config) {
 		  userSession.login(dataFromServer);
-          console.log(dataFromServer);
 		  $location.path( '/user' );
        });
         responsePromise.error(function(data, status, headers, config) {
@@ -24,7 +22,6 @@ app.controller('registerController', function($scope, $http, $location) {
 	}
 	var responsePromiseTowns = $http.get("http://softuni-ads.azurewebsites.net/api/towns", {});
        responsePromiseTowns.success(function(dataFromServer) {
-          console.log(dataFromServer);
 		  $scope.towns = dataFromServer;
        });
         responsePromiseTowns.error(function(data, status, headers, config) {

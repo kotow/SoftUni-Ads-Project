@@ -8,7 +8,6 @@ app.controller('AllAdsController', function($scope, adsData, $log, $http) {
 		})
 	var responsePromise = $http.get("http://softuni-ads.azurewebsites.net/api/categories", {});
        responsePromise.success(function(dataFromServer) {
-          console.log(dataFromServer);
 		  $scope.categories = dataFromServer;
        });
         responsePromise.error(function(data, status, headers, config) {
@@ -16,7 +15,6 @@ app.controller('AllAdsController', function($scope, adsData, $log, $http) {
        });
 	var responsePromiseTowns = $http.get("http://softuni-ads.azurewebsites.net/api/towns", {});
        responsePromiseTowns.success(function(dataFromServer) {
-          console.log(dataFromServer);
 		  $scope.towns = dataFromServer;
        });
         responsePromiseTowns.error(function(data, status, headers, config) {

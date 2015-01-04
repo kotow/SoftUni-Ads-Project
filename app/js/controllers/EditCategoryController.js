@@ -12,7 +12,6 @@ app.controller('EditCategoryController', function($scope, adsData, $log, $http, 
 	var town = {
 		name:$scope.town.name
 	};
-	console.log(town);
 		var responsePromise = $http.put("http://softuni-ads.azurewebsites.net/api/admin/categories/"+$routeParams.townId, town);
 		responsePromise.success(function(dataFromServer) {
 			$location.path( '/admin/towns/list' );

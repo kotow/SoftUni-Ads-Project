@@ -1,7 +1,6 @@
 app.controller('PublishNewAd', function($scope, $http) {
 	$scope.myForm = {};
  $scope.fileSelected = function(fileInputField) {
- console.log(fileInputField.files[0]);
             //delete $scope.adData.imageDataUrl;
             var file = fileInputField.files[0];
             if (file.type.match(/image\/.*/)) {
@@ -16,7 +15,6 @@ app.controller('PublishNewAd', function($scope, $http) {
             }
         }
     $scope.myForm.submitTheForm = function(item, event) {
-		console.log($scope.myForm.imageDataUrl);
 		$http.defaults.headers.common['Authorization'] = "Bearer " + userSession.getCurrentUser().access_token;
 		var dataObject = {
 			imageDataUrl: $scope.myForm.imageDataUrl,
@@ -27,7 +25,6 @@ app.controller('PublishNewAd', function($scope, $http) {
 		};
 		var responsePromise = $http.post("http://softuni-ads.azurewebsites.net/api/user/ads", dataObject, {}); 
 		responsePromise.success(function(dataFromServer, status, headers, config) {
-			console.log(dataFromServer);
 		});
 		responsePromise.error(function(data, status, headers, config) {
 			alert("Submitting form failed!");
@@ -36,7 +33,6 @@ app.controller('PublishNewAd', function($scope, $http) {
 	
 	var responsePromise = $http.get("http://softuni-ads.azurewebsites.net/api/categories", {});
 	responsePromise.success(function(dataFromServer) {
-		console.log(dataFromServer);
 		$scope.categories = dataFromServer;
 	});
 	responsePromise.error(function(data, status, headers, config) {
@@ -45,7 +41,6 @@ app.controller('PublishNewAd', function($scope, $http) {
 		
 	var responsePromiseTowns = $http.get("http://softuni-ads.azurewebsites.net/api/towns", {});
 	responsePromiseTowns.success(function(dataFromServer) {
-		console.log(dataFromServer);
 		$scope.towns = dataFromServer;
 	});
 	responsePromiseTowns.error(function(data, status, headers, config) {

@@ -29,7 +29,6 @@ $(".image-box").html("<img src='" + dataFromServer.imageDataUrl + "'>");
         });    
 		var responsePromise = $http.get("http://softuni-ads.azurewebsites.net/api/categories", {});
 	responsePromise.success(function(dataFromServer) {
-		console.log(dataFromServer);
 		$scope.categories = dataFromServer;
 	});
 	responsePromise.error(function(data, status, headers, config) {
@@ -38,7 +37,6 @@ $(".image-box").html("<img src='" + dataFromServer.imageDataUrl + "'>");
 		
 	var responsePromiseTowns = $http.get("http://softuni-ads.azurewebsites.net/api/towns", {});
 	responsePromiseTowns.success(function(dataFromServer) {
-		console.log(dataFromServer);
 		$scope.towns = dataFromServer;
 	});
 	responsePromiseTowns.error(function(data, status, headers, config) {
@@ -54,8 +52,7 @@ $scope.editAd =  function(){
 		};
 		var responsePromise = $http.put("http://softuni-ads.azurewebsites.net/api/admin/ads/"+$routeParams.adId, dataObject);
         responsePromise.success(function(dataFromServer) {
-         	//$location.path( '/user' );
-			console.log(dataFromServer);
+         	$location.path( '/admin/home' );
 		});
         responsePromise.error(function(data, status, headers, config) {
 			alert("Submitting form failed!");

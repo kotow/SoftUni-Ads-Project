@@ -22,7 +22,6 @@ app.controller('AdminDeleteUserController', function($scope, $http, $location, $
 	submitTheForm = function(item, event) {
 		var responsePromisee = $http.delete("http://softuni-ads.azurewebsites.net/api/admin/user/"+$routeParams.userName);
 		responsePromisee.success(function(dataFromServer, status, headers, config) {
-			console.log(dataFromServer);
 		});
 		responsePromise.error(function(data, status, headers, config) {
 			alert("Submitting form failed!");

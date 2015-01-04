@@ -20,7 +20,6 @@ app.controller('EditProfileController', function($scope, $http, $location) {
 	submitTheForm = function(item, event) {
 		var responsePromisee = $http.put("http://softuni-ads.azurewebsites.net/api/user/profile", $scope.myForm, {});
 		responsePromisee	.success(function(dataFromServer, status, headers, config) {
-			console.log(dataFromServer);
 		});
 		responsePromise.error(function(data, status, headers, config) {
 			alert("Submitting form failed!");
@@ -33,11 +32,9 @@ app.controller('EditProfileController', function($scope, $http, $location) {
 	newPassword: $scope.pass.new,
 	confirmPassword: $scope.pass.conf
 	}
-	console.log(password);
 	
 		var responsePromisee = $http.put("http://softuni-ads.azurewebsites.net/api/user/changepassword", password, {});
 		responsePromisee.success(function(dataFromServer, status, headers, config) {
-			console.log(dataFromServer);
 		});
 		responsePromise.error(function(data, status, headers, config) {
 			alert("Submitting form failed!");
