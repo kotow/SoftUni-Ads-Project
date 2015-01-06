@@ -17,12 +17,13 @@
 		</tr>
 		<tr ng-repeat="town in towns">
 			<td>{{town.id}}</td>
-			<td>{{town.name}}</td>
+			<td>{{town.username}}</td>
 			<td>	
 				<a href="#/admin/categories/edit/{{town.id}}">Edit</a>
 				<a href="#/admin/categories/delete/{{town.id}}">Delete</a>
 			</td>
 		</tr>
 	</table>
+<pagination total-items="ads.numItems" ng-model="adsParams.startPage"  items-per-page="adsParams.pageSize" ng-change="reloadAds()"  max-size="9" boundary-links="true"></pagination>
 	<p><a href="#/admin/categories/add" class="button">Add categorie</a></p>
 </div>

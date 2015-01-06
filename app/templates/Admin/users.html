@@ -8,7 +8,7 @@
 		<a href="/#/admin/towns/list" class="button" >Towns</a>
 	</div>
 </div>
-<div>
+<div class="col-md-9">
 	<table id="phones">
 		<tr>
 			<th>Username</th>
@@ -28,4 +28,5 @@
 			</td>
 		</tr>
 	</table>
+<pagination total-items="ads.numItems" ng-model="adsParams.startPage"  items-per-page="adsParams.pageSize" ng-change="reloadAds()"  max-size="9" boundary-links="true"></pagination>
 </div>

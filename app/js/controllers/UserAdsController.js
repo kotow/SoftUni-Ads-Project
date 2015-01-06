@@ -8,8 +8,6 @@ app.controller('UserAdsController', function($scope, adsData, $log, $http) {
 	var getAds = $http.get("http://softuni-ads.azurewebsites.net/api/user/ads?startPage="+ $scope.adsParams.startPage + "&pageSize="+ $scope.adsParams.pageSize);
 		getAds.success(function(dataFromServer) {
 			$scope.data = dataFromServer;
-			console.log(dataFromServer);
-			console.log($scope.adsParams);
 			$scope.ads = dataFromServer;
 		});
 		getAds.error(function(data, status, headers, config) {
