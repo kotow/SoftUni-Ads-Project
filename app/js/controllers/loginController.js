@@ -1,4 +1,4 @@
-app.controller('loginController', function($scope, $http, $location) {
+app.controller('loginController', function($scope, $http, $location, notifyService) {
 	$scope.myForm = {};
     $scope.myForm.submitTheForm = function(item, event) {
        var dataObject = {
@@ -12,7 +12,8 @@ app.controller('loginController', function($scope, $http, $location) {
 		  $location.path( '/user' );
        });
         responsePromise.error(function(data, status, headers, config) {
-          alert("Submitting form failed!");
+                  notifyService.showError("Login failed", data);
+		  $location.path( '/login' );
        });
 	}
 
