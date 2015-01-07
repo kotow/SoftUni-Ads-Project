@@ -13,7 +13,7 @@ app.controller('loginController', function($scope, $http, $location, notifyServi
        });
         responsePromise.error(function(data, status, headers, config) {
                   notifyService.showError("Login failed", data);
-		  $location.path( '/login' );
+		  //$location.path( '/login' );
        });
 	}
 
