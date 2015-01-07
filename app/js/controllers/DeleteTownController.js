@@ -1,4 +1,4 @@
-app.controller('DeleteTownController', function($scope, adsData, $log, $http, $routeParams, $location) {
+app.controller('DeleteTownController', function($scope, $log, $http, $routeParams, $location) {
 	$http.defaults.headers.common['Authorization'] = "Bearer " + userSession.getCurrentUser().access_token;
 	var responsePromiseTowns = $http.get("http://softuni-ads.azurewebsites.net/api/towns", {});
 	responsePromiseTowns.success(function(dataFromServer) {

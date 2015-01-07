@@ -1,7 +1,6 @@
 app.controller('RightSidebarController',
-    function ($http, $scope, $rootScope) {
-       
-        $scope.categoryClicked = function(clickedCategoryId) {
+    function ($http, $scope, $rootScope, publicData) {
+	$scope.categoryClicked = function(clickedCategoryId) {
             $scope.selectedCategoryId = clickedCategoryId;
             $rootScope.$broadcast("categorySelectionChanged", clickedCategoryId);
         };
@@ -11,18 +10,18 @@ app.controller('RightSidebarController',
             $rootScope.$broadcast("townSelectionChanged", clickedTownId);
         };
     
-	var responsePromise = $http.get("http://softuni-ads.azurewebsites.net/api/categories", {});
-       responsePromise.success(function(dataFromServer) {
+	var categories = publicData.getCategories();
+       categories.success(function(dataFromServer) {
 		  $scope.categories = dataFromServer;
        });
-        responsePromise.error(function(data, status, headers, config) {
+        categories.error(function(data, status, headers, config) {
           alert("Submitting form failed!");
        });
-	var responsePromiseTowns = $http.get("http://softuni-ads.azurewebsites.net/api/towns", {});
-       responsePromiseTowns.success(function(dataFromServer) {
+	var Towns = publicData.getTowns();
+       Towns.success(function(dataFromServer) {
 		  $scope.towns = dataFromServer;
        });
-        responsePromiseTowns.error(function(data, status, headers, config) {
+        Towns.error(function(data, status, headers, config) {
           alert("Submitting form failed!");
        });
 	   }

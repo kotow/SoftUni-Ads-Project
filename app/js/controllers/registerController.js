@@ -1,4 +1,6 @@
 app.controller('registerController', function($scope, $http, $location) {
+$scope.hideFilter = true;       
+
 	$scope.myForm = {};
     $scope.myForm.submitTheForm = function(item, event) {
        var dataObject = {

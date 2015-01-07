@@ -1,5 +1,4 @@
-
-app.controller('AdminAllAdsController', function($scope, adsData, $log, $http, $rootScope) {
+app.controller('AdminAllAdsController', function($scope, $log, $http, $rootScope) {
 	$http.defaults.headers.common['Authorization'] = "Bearer " + userSession.getCurrentUser().access_token;
 
         $scope.categoryClicked = function(clickedCategoryId) {

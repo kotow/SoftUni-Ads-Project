@@ -43,10 +43,9 @@ var loginNotRequired = function($location, $q) {
 }
 var app = angular.module('softUniApp', ['ngResource', 'ngRoute', 'ui.bootstrap.pagination'])
 .config(function ($routeProvider) {
-	$routeProvider.when('/ads', {
+	$routeProvider.when('/', {
 		templateUrl: 'templates/allAds.html',
-		controller: 'AllAdsController',
-		resolve: { loginNotRequired: loginNotRequired }
+		controller: 'AllAdsController'
 	});
 	$routeProvider.when('/login', {
 		templateUrl: 'templates/login.html',
@@ -58,17 +57,12 @@ var app = angular.module('softUniApp', ['ngResource', 'ngRoute', 'ui.bootstrap.p
 		controller: 'registerController',
 		resolve: { loginNotRequired: loginNotRequired }
 	});
-	$routeProvider.when('/user', {
-		templateUrl: 'templates/user/home.html',
-		controller: 'AllAdsController',
-		resolve: { loginRequired: loginRequired }
-	});
-	$routeProvider.when('/publish', {
+	$routeProvider.when('/user/ads/publish', {
 		templateUrl: 'templates/user/publish.html',
 		controller: 'PublishNewAd',
 		resolve: { loginRequired: loginRequired }
 	});
-	$routeProvider.when('/userAds', {
+	$routeProvider.when('/user/ads', {
 		templateUrl: 'templates/user/userAds.html',
 		controller: 'UserAdsController',
 		resolve: { loginRequired: loginRequired }
@@ -93,7 +87,7 @@ var app = angular.module('softUniApp', ['ngResource', 'ngRoute', 'ui.bootstrap.p
 		controller: 'EditAdController',
 		resolve: { loginRequired: loginRequired }
 	});
-	$routeProvider.when('/editprofile', {
+	$routeProvider.when('/user/profile', {
 		templateUrl: 'templates/user/editprofile.html',
 		controller: 'EditProfileController',
 		resolve: { loginRequired: loginRequired }

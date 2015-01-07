@@ -1,10 +1,11 @@
-app.controller('UserAdsController', function($scope, adsData, $log, $http) {
-	   $http.defaults.headers.common['Authorization'] = "Bearer " + userSession.getCurrentUser().access_token;
-	      $scope.adsParams = {
-          'startPage' : 1,
-          'pageSize' : 20
-      };
-      $scope.reloadAds = function() {
+app.controller('UserAdsController', function($scope, $log, $http) {	
+	$http.defaults.headers.common['Authorization'] = "Bearer " + userSession.getCurrentUser().access_token;
+	$scope.adsParams = {
+		'startPage' : 1,
+		'pageSize' : 20
+	};
+    $scope.asd = false;
+	$scope.reloadAds = function() {
 	var getAds = $http.get("http://softuni-ads.azurewebsites.net/api/user/ads?startPage="+ $scope.adsParams.startPage + "&pageSize="+ $scope.adsParams.pageSize);
 		getAds.success(function(dataFromServer) {
 			$scope.data = dataFromServer;

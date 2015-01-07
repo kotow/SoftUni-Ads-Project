@@ -1,4 +1,4 @@
-app.controller('AdminEditAdController', function($scope, adsData, $log, $http, $routeParams, $location) {
+app.controller('AdminEditAdController', function($scope, $log, $http, $routeParams, $location) {
 	$http.defaults.headers.common['Authorization'] = "Bearer " + userSession.getCurrentUser().access_token;
 
 	$scope.fileSelected = function(fileInputField) {

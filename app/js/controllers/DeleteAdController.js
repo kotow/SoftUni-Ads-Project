@@ -1,4 +1,4 @@
-app.controller('DeleteAdController', function($scope, adsData, $log, $http, $routeParams, $location) {
+app.controller('DeleteAdController', function($scope, $log, $http, $routeParams, $location) {
 	$http.defaults.headers.common['Authorization'] = "Bearer " + userSession.getCurrentUser().access_token;
 	var responsePromise = $http.get("http://softuni-ads.azurewebsites.net/api/user/ads/"+$routeParams.adId, {});
         responsePromise.success(function(dataFromServer) {

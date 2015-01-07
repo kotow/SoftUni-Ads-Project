@@ -1,4 +1,4 @@
-app.controller('EditCategoryController', function($scope, adsData, $log, $http, $routeParams, $location) {
+app.controller('EditCategoryController', function($scope, $log, $http, $routeParams, $location) {
 	$http.defaults.headers.common['Authorization'] = "Bearer " + userSession.getCurrentUser().access_token;
 	var responsePromiseTowns = $http.get("http://softuni-ads.azurewebsites.net/api/categories", {});
 	responsePromiseTowns.success(function(dataFromServer) {

@@ -1,4 +1,4 @@
-app.controller('AdminAllTownsController', function($scope, adsData, $log, $http) {
+app.controller('AdminAllTownsController', function($scope, $log, $http) {
 	$http.defaults.headers.common['Authorization'] = "Bearer " + userSession.getCurrentUser().access_token;
 	      $scope.adsParams = {
           'startPage' : 1,

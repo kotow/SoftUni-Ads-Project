@@ -1,4 +1,4 @@
-app.controller('EditAdController', function($scope, adsData, $log, $http, $routeParams, $location) {
+app.controller('EditAdController', function($scope, $log, $http, $routeParams, $location) {
 	$http.defaults.headers.common['Authorization'] = "Bearer " + userSession.getCurrentUser().access_token;
 var dataObject = {};
 

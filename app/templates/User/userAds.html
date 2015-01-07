@@ -1,33 +1,12 @@
-<div class="col-md-3">
-	<div class="dialog-box" id="welcome">
-		<h1>Navigation</h1>
-		<input type="button" onclick="userSession.logout()" class="button" value="LogOut"/></br>
-		<a href="#/user" class="button">Home</a></br>
-		<a href="#/userAds" class="button" >My Ads</a></br>
-		<a href="#/publish" class="button">Publish New Ad</a></br>
-		<a href="#/editprofile" class="button" >Edit Profile</a>
-	</div>
-	<div class="dialog-box" id="welcome">
-		<h1>My Ads</h1>
-		<a href="" class="button">All</a></br>
-		<a href="" class="button" >Published</a></br>
-		<a href="" class="button">Waiting Approval</a></br>
-		<a href="" class="button" >Inactive</a></br>
-		<a href="" class="button" >Rejected</a>
-	</div>
-</div>
-
-<div class="col-md-9">
-	<div class="dialog-box" ng-repeat="ad in data.ads" style="width:100%">
-		<h1>{{ad.title}}	Date:{{ad.date | date:'dd-MMM-yyyy'}}</h1>
-		<img src="" ng-src="{{ad.imageDataUrl}}" style="width:30%"/>
-		<div>{{ad.text}}</div>
-		<div><strong>Category:</strong> {{ad.categoryName}}</div>
-		<div><strong>Town:</strong> {{ad.townName}}</div>
-		<div><strong>Status:</strong>{{ad.id}} {{ad.status}}</div>
-		<a href="/#/edit/{{ad.id}}" class="button" >Edit</a>
-		<a href="/#/publishagain/{{ad.id}}" class="button">Re</a>
-		<a href="/#/delete/{{ad.id}}" class="button" target="_self" >Delete</a>
-		<a href="/#/deactivate/{{ad.id}}" class="button" >Deactivate</a>	
-	</div>
+<div class="box" ng-repeat="ad in data.ads" style="width:100%">
+	<h1>{{ad.title}}	Date:{{ad.date | date:'dd-MMM-yyyy'}}</h1>
+	<img src="" ng-src="{{ad.imageDataUrl}}" style="width:30%"/>
+	<div>{{ad.text}}</div>
+	<div><strong>Category:</strong> {{ad.categoryName}}</div>
+	<div><strong>Town:</strong> {{ad.townName}}</div>
+	<div><strong>Status:</strong>{{ad.id}} {{ad.status}}</div>
+	<a href="/#/edit/{{ad.id}}" class="button" >Edit</a>
+	<a href="/#/publishagain/{{ad.id}}" class="button">Re</a>
+	<a href="/#/delete/{{ad.id}}" class="button" target="_self" >Delete</a>
+	<a href="/#/deactivate/{{ad.id}}" class="button" >Deactivate</a>	
 </div>
