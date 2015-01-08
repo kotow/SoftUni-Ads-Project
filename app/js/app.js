@@ -59,37 +59,37 @@ var app = angular.module('softUniApp', ['ngResource', 'ngRoute', 'ui.bootstrap.p
 	});
 	$routeProvider.when('/user/ads/publish', {
 		templateUrl: 'templates/user/publish.html',
-		controller: 'PublishNewAd',
+		controller: 'UserController',
 		resolve: { loginRequired: loginRequired }
 	});
 	$routeProvider.when('/user/ads', {
 		templateUrl: 'templates/user/userAds.html',
-		controller: 'UserAdsController',
+		controller: 'UserController',
 		resolve: { loginRequired: loginRequired }
 	});
 	$routeProvider.when('/delete/:adId', {
 		templateUrl: 'templates/user/delete.html',
-		controller: 'DeleteAdController',
+		controller: 'UserController',
 		resolve: { loginRequired: loginRequired }
 	});
 	$routeProvider.when('/deactivate/:adId', {
 		templateUrl: 'templates/user/deactivate.html',
-		controller: 'DeactivateAdController',
+		controller: 'UserController',
 		resolve: { loginRequired: loginRequired }
 	});
 	$routeProvider.when('/publishagain/:adId', {
 		templateUrl: 'templates/user/rePublish.html',
-		controller: 'PublishAgainAdController',
+		controller: 'UserController',
 		resolve: { loginRequired: loginRequired }
 	});
 	$routeProvider.when('/edit/:adId', {
 		templateUrl: 'templates/user/edit.html',
-		controller: 'EditAdController',
+		controller: 'UserController',
 		resolve: { loginRequired: loginRequired }
 	});
 	$routeProvider.when('/user/profile', {
 		templateUrl: 'templates/user/editprofile.html',
-		controller: 'EditProfileController',
+		controller: 'UserController',
 		resolve: { loginRequired: loginRequired }
 	});
 	$routeProvider.when('/admin/home', {
@@ -106,8 +106,7 @@ var app = angular.module('softUniApp', ['ngResource', 'ngRoute', 'ui.bootstrap.p
 		templateUrl: 'templates/admin/categories.html',
 		controller: 'AdminCategoriesController',
 		resolve: {adminRequired: adminRequired}
-	});
-	
+	});	
 	$routeProvider.when('/admin/ads/edit/:adId', {
 		templateUrl: 'templates/admin/editAd.html',
 		controller: 'AdminAdsController',
