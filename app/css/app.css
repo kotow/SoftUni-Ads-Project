@@ -208,16 +208,6 @@ body {
     /*text-align: center;*/
 }
 
-.button {
-    background: #70AD47;
-    border: 2px solid #507E32;
-    border-radius: 5px;
-    color: white;
-    text-decoration: none;
-    padding: 10px 20px;
-    display: inline-block;
-    margin: 0 10px;
-}
 
 .link {
     color: #2E75B6;

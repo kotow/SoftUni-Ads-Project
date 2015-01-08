@@ -4,14 +4,15 @@
 </pagination>
 
 <div class="box" ng-repeat="ad in data.ads" style="width:100%">
-	<h1>{{ad.title}}	Date:{{ad.date | date:'dd-MMM-yyyy'}}</h1>
+	<h1>{{ad.title}}</h1>
+	<span>Date:{{ad.date | date:'dd-MMM-yyyy'}}</span>
 	<img src="" ng-src="{{ad.imageDataUrl}}" style="width:30%"/>
 	<div>{{ad.text}}</div>
 	<div><strong>Category:</strong> {{ad.categoryName}}</div>
 	<div><strong>Town:</strong> {{ad.townName}}</div>
-	<div><strong>Status:</strong>{{ad.id}} {{ad.status}}</div>
-	<a href="/#/edit/{{ad.id}}" class="button" >Edit</a>
-	<a href="/#/publishagain/{{ad.id}}" class="button">Re</a>
-	<a href="/#/delete/{{ad.id}}" class="button" target="_self" >Delete</a>
-	<a href="/#/deactivate/{{ad.id}}" class="button" >Deactivate</a>	
+	<div><strong>Status:</strong>{{ad.status}}</div>
+	<a href="/#/user/ads/edit/{{ad.id}}" class="button" >Edit</a>
+	<a href ng-click="publishAgain(ad.id)" class="button">Re</a>
+	<a href="/#/user/ads/delete/{{ad.id}}" class="button" target="_self" >Delete</a>
+	<a href ng-click="deactivateAd(ad.id)" class="button" >Deactivate</a>	
 </div>

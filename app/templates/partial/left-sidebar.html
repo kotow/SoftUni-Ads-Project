@@ -31,10 +31,10 @@
 <div ng-if="user.isAdmin()" class="box">
     <h2>Administrator</h2>
     <ul class="sidebar-menu">
-        <li><a href="#/admin/ads">Ads</a></li>
-        <li><a href="#/admin/users">Users</a></li>
-        <li><a href="#/admin/categories">Categories</a></li>
-        <li><a href="#/admin/towns">Towns</a></li>
+        <li><a href="#/admin/home">Ads</a></li>
+        <li><a href="#/admin/users/list">Users</a></li>
+        <li><a href="#/admin/categories/list">Categories</a></li>
+        <li><a href="#/admin/towns/list">Towns</a></li>
         <li><a ng-click="logout()">Logout</a></li>
     </ul>
 </div>
@@ -42,24 +42,24 @@
     <h2>Categories</h2>
     <ul class="sidebar-menu">
         <li class="special"
-            ng-class="{'selected' : selectedCategoryId == null}"
-            ng-click="categoryClicked(null)">
+            ng-class="{'selected' : selectedStatus == undefined}"
+            ng-click="statusClicked(undefined)">
             All
         </li>
         <li ng-click="statusClicked('Published')"
-            ng-class="{'selected' : selectedCategoryId == 'Published'}">
+            ng-class="{'selected' : selectedStatus == 'Published'}">
 			Published
         </li>
         <li ng-click="statusClicked('WaitingApproval')"
-            ng-class="{'selected' : selectedCategoryId == 'WaitingApproval'}">
+            ng-class="{'selected' : selectedStatus == 'WaitingApproval'}">
 			WaitingApproval
         </li>
         <li ng-click="statusClicked('Inactive')"
-            ng-class="{'selected' : selectedCategoryId == 'Inactive'}">
+            ng-class="{'selected' : selectedStatus == 'Inactive'}">
 			Inactive
         </li>
         <li ng-click="statusClicked('Rejected')"
-            ng-class="{'selected' : selectedCategoryId == 'Rejected'}">
+            ng-class="{'selected' : selectedStatus == 'Rejected'}">
 			Rejected
         </li>
     </ul>

@@ -1,5 +1,6 @@
-app.controller('UserController', function($scope, $log, $http, $routeParams, $location, notifyService) {	
+app.controller('UserController', function($scope, $log, $http, $routeParams, $location, notifyService, $route) {	
 	$http.defaults.headers.common['Authorization'] = "Bearer " + userSession.getCurrentUser().access_token;
+	$scope.hideFilters = true;
 	$scope.adsParams = {
 		'startPage' : 1,
 		'pageSize' : 1
@@ -83,22 +84,22 @@ app.controller('UserController', function($scope, $log, $http, $routeParams, $lo
 			});
 	}
 	
-	$scope.publishAgain =  function(){
-		var responsePromise = $http.put("http://softuni-ads.azurewebsites.net/api/user/ads/publishagain/"+$routeParams.adId, {});
+	$scope.publishAgain =  function(id){
+		var responsePromise = $http.put("http://softuni-ads.azurewebsites.net/api/user/ads/publishagain/" + id);
         responsePromise.success(function(dataFromServer) {
          	notifyService.showInfo("Ad resend for approving");
-			$location.path( '/user/ads' );
+			$route.reload();
 		});
         responsePromise.error(function(data, status, headers, config) {
 			notifyService.showError("Failed to publish ad", data);
 		});
 	}    
 	
-	$scope.deactivateAd =  function(){
-		var responsePromise = $http.put("http://softuni-ads.azurewebsites.net/api/user/ads/deactivate/"+$routeParams.adId, {});
+	$scope.deactivateAd =  function(id){
+		var responsePromise = $http.put("http://softuni-ads.azurewebsites.net/api/user/ads/deactivate/" + id);
         responsePromise.success(function(dataFromServer) {
 			notifyService.showInfo("Ad deactivated");    
-			$location.path( '/user/ads' );
+			$route.reload();
 		});
         responsePromise.error(function(data, status, headers, config) {
 			notifyService.showError("Failed to deactivate ad", data);

@@ -1,4 +1,5 @@
 app.controller('AllAdsController', function($scope, publicData, notifyService) {
+	$scope.hideFilters = false;
 	$scope.adsParams = {
 		'startPage' : 1,
 		'pageSize' : 5

@@ -14,7 +14,7 @@ app.controller('LeftSidebarController',
     },
     isLoggedUser : function() {
         var userData = sessionStorage['currentUser'];
-        if (userData && !userData.isAdmin) {
+        if (userData && userData.isAdmin == false) {
             return true;
         }
 		else return false;

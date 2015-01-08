@@ -1,17 +1,19 @@
-	<table id="phones">
-		<tr>
-			<th>Id</th>
-			<th>Categorie</th>
-			<th>Action</th>
-		</tr>
-		<tr ng-repeat="category in categories">
-			<td>{{category.id}}</td>
-			<td>{{category.username}}</td>
-			<td>	
-				<a href="#/admin/categories/edit/{{category.id}}">Edit</a>
-				<a href="#/admin/categories/delete/{{category.id}}">Delete</a>
-			</td>
-		</tr>
-	</table>
+<table>
+	<tr>
+		<th>Id</th>
+		<th>Categorie</th>
+		<th>Action</th>
+	</tr>
+	<tr ng-repeat="category in categories">
+		<td>{{category.id}}</td>
+		<td>{{category.username}}</td>
+		<td>	
+			<a href="#/admin/categories/edit/{{category.id}}">Edit</a>
+			<a href="#/admin/categories/delete/{{category.id}}">Delete</a>
+		</td>
+	</tr>
+</table>
 <pagination total-items="ads.numItems" ng-model="adsParams.startPage"  items-per-page="adsParams.pageSize" ng-change="reloadAds()"  max-size="9" boundary-links="true"></pagination>
-	<p><a href="#/admin/categories/add" class="button">Add categorie</a></p>
+<p>
+	<a href="#/admin/categories/add" class="button">Create category</a>
+</p>

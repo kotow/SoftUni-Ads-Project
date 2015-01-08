@@ -67,22 +67,12 @@ var app = angular.module('softUniApp', ['ngResource', 'ngRoute', 'ui.bootstrap.p
 		controller: 'UserController',
 		resolve: { loginRequired: loginRequired }
 	});
-	$routeProvider.when('/delete/:adId', {
+	$routeProvider.when('/user/ads/delete/:adId', {
 		templateUrl: 'templates/user/delete.html',
 		controller: 'UserController',
 		resolve: { loginRequired: loginRequired }
 	});
-	$routeProvider.when('/deactivate/:adId', {
-		templateUrl: 'templates/user/deactivate.html',
-		controller: 'UserController',
-		resolve: { loginRequired: loginRequired }
-	});
-	$routeProvider.when('/publishagain/:adId', {
-		templateUrl: 'templates/user/rePublish.html',
-		controller: 'UserController',
-		resolve: { loginRequired: loginRequired }
-	});
-	$routeProvider.when('/edit/:adId', {
+	$routeProvider.when('/user/ads/edit/:adId', {
 		templateUrl: 'templates/user/edit.html',
 		controller: 'UserController',
 		resolve: { loginRequired: loginRequired }
