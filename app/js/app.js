@@ -104,7 +104,7 @@ var app = angular.module('softUniApp', ['ngResource', 'ngRoute', 'ui.bootstrap.p
 	});
 	$routeProvider.when('/admin/categories/list', {
 		templateUrl: 'templates/admin/categories.html',
-		controller: 'AdminAdsController',
+		controller: 'AdminCategoriesController',
 		resolve: {adminRequired: adminRequired}
 	});
 	
@@ -133,19 +133,19 @@ var app = angular.module('softUniApp', ['ngResource', 'ngRoute', 'ui.bootstrap.p
 		controller: 'AdminTownsController',
 		resolve: {adminRequired: adminRequired}
 	});
-	$routeProvider.when('/admin/categories/delete/:townId', {
+	$routeProvider.when('/admin/categories/delete/:categoryId', {
 		templateUrl: 'templates/admin/deletecategory.html',
-		controller: 'DeleteCategoryController',
+		controller: 'AdminCategoriesController',
 		resolve: {adminRequired: adminRequired}
 	});
-	$routeProvider.when('/admin/categories/edit/:townId', {
+	$routeProvider.when('/admin/categories/edit/:categoryId', {
 		templateUrl: 'templates/admin/editcategory.html',
-		controller: 'EditCategoryController',
+		controller: 'AdminCategoriesController',
 		resolve: {adminRequired: adminRequired}
 	});
 	$routeProvider.when('/admin/categories/add', {
 		templateUrl: 'templates/admin/addcategory.html',
-		controller: 'AddCategoryController',
+		controller: 'AdminCategoriesController',
 		resolve: {adminRequired: adminRequired}
 	});
 	$routeProvider.when('/admin/towns/list', {
