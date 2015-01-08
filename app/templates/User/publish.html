@@ -1,39 +1,39 @@
 <div id="register-form" class="dialog-box">
 	<h1>Publish New Ad</h1>
-<form>
-	<p>
-		<label for="username">Title:</label>
-		<input ng-model="myForm.title" type="text" id="title" />
-	</p>
-	<p>
-		<label for="password">Text:</label>
-		<textarea ng-model="myForm.text" id="text"></textarea>
-	</p>	
-	<p>
-        <label for="image">Image:</label>
-        <input type="file" id="image"
-               onchange="angular.element(this).scope().fileSelected(this)" />
-        <div class="image-box">
-            <p>Image Preview</p>
-        </div>
-    </p>
-	<p>
-	Category:
-					<select ng-model="myForm.categoryId">
-						<option selected value="">All</option>
-						<option ng-repeat="cat in categories" value="{{cat.id}}">{{cat.name}}</option>
-					</select>
-					Town:
-					<select ng-model="myForm.townId">
-					<option selected value="">All</option>
-						<option ng-repeat="town in towns" value="{{town.id}}">{{town.name}}</option>
-					</select>
-	</p>
-	<p class="buttons">
-		<a href="#" ng-click="myForm.submitTheForm()" class="button">Publish</a>
-		<a href="/login"  class="button">Cancel</a>
-	</p>
-</form>
+	<form>
+		<p>
+			<label for="username">Title:</label>
+			<input ng-model="publish.title" type="text" id="title" />
+		</p>
+		<p>
+			<label for="password">Text:</label>
+			<textarea ng-model="publish.text" id="text"></textarea>
+		</p>	
+		<p>
+			<label for="image">Image:</label>
+			<input type="file" id="image" onchange="angular.element(this).scope().fileSelected(this)" />
+			<div class="image-box">
+				<p>Image Preview</p>
+			</div>
+		</p>
+		<p>
+			<label for="category">Category:</label>
+			<select id="category" ng-model="publish.categoryId">
+				<option selected value=""></option>
+				<option ng-repeat="cat in categories" value="{{cat.id}}">{{cat.name}}</option>
+			</select>
+			<label for="town">Town:</label>
+			<select id="town"ng-model="publish.townId">
+				<option selected value=""></option>
+				<option ng-repeat="town in towns" value="{{town.id}}">{{town.name}}</option>
+			</select>
+		</p>
+		<p class="buttons">
+			<a href ng-click="publish.submit()" class="button">Publish</a>
+			<a href="/user/ads"  class="button">Cancel</a>
+		</p>
+	</form>
+</div>
 
 </div>
 

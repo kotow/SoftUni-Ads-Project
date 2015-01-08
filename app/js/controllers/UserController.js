@@ -1,30 +1,36 @@
-app.controller('UserController', function($scope, $log, $http, $routeParams, $location) {	
+app.controller('UserController', function($scope, $log, $http, $routeParams, $location, notifyService) {	
 	$http.defaults.headers.common['Authorization'] = "Bearer " + userSession.getCurrentUser().access_token;
 	$scope.adsParams = {
 		'startPage' : 1,
 		'pageSize' : 1
 	};
+	
 	$scope.reloadAds = function() {
-
-	var getUserAds = $http.get("http://softuni-ads.azurewebsites.net/api/user/ads?", {params: $scope.adsParams})
+		var getUserAds = $http.get("http://softuni-ads.azurewebsites.net/api/user/ads?", {params: $scope.adsParams})
 		.success(function(dataFromServer) {
 			$scope.data = dataFromServer;
 			$scope.ads = dataFromServer;
 		})
 		.error(function(data, status, headers, config) {
-			alert("Submitting form failed!");
+			notifyService.showError("Failed to load ads", data);
 		});
     };
 
+    $scope.$on("statusSelectionChanged", function(event, status) {
+		$scope.adsParams.status = status;
+		$scope.adsParams.startPage = 1;
+		$scope.reloadAds();
+    });
+
 	$scope.reloadAds();
 
-	$scope.myForm = {};
+	$scope.publish = {};
 	$scope.fileSelected = function(fileInputField) {
 		var file = fileInputField.files[0];
             if (file.type.match(/image\/.*/)) {
 				var reader = new FileReader();
                 reader.onload = function() {
-					$scope.myForm.imageDataUrl = reader.result;
+					$scope.publish.imageDataUrl = reader.result;
                     $(".image-box").html("<img src='" + reader.result + "'>");
                 };
 				reader.readAsDataURL(file);
@@ -33,19 +39,21 @@ app.controller('UserController', function($scope, $log, $http, $routeParams, $lo
             }
     }
     
-	$scope.myForm.submitTheForm = function(item, event) {
-		var dataObject = {
-			imageDataUrl: $scope.myForm.imageDataUrl,
-			title: $scope.myForm.title,
-			text: $scope.myForm.text,
-			categoryId: $scope.myForm.categoryId,
-			townId: $scope.myForm.townId,
+	$scope.publish.submit = function(item, event) {
+		var adDetails = {
+			imageDataUrl: $scope.publish.imageDataUrl,
+			title: $scope.publish.title,
+			text: $scope.publish.text,
+			categoryId: $scope.publish.categoryId,
+			townId: $scope.publish.townId,
 		};
-		var responsePromise = $http.post("http://softuni-ads.azurewebsites.net/api/user/ads", dataObject, {}); 
+		var responsePromise = $http.post("http://softuni-ads.azurewebsites.net/api/user/ads", adDetails); 
 		responsePromise.success(function(dataFromServer, status, headers, config) {
+			notifyService.showInfo("Ad published");
+			$location.path('user/ads');
 		});
 		responsePromise.error(function(data, status, headers, config) {
-			alert("Submitting form failed!");
+			notifyService.showError("Failed to post ad", data);
 		});
 	}
 	
@@ -54,7 +62,7 @@ app.controller('UserController', function($scope, $log, $http, $routeParams, $lo
 		$scope.categories = dataFromServer;
 	});
 	responsePromise.error(function(data, status, headers, config) {
-		alert("Submitting form failed!");
+		notifyService.showError("Failed to load categories", data);
 	});
 		
 	var responsePromiseTowns = $http.get("http://softuni-ads.azurewebsites.net/api/towns", {});
@@ -62,79 +70,82 @@ app.controller('UserController', function($scope, $log, $http, $routeParams, $lo
 		$scope.towns = dataFromServer;
 	});
 	responsePromiseTowns.error(function(data, status, headers, config) {
-          alert("Submitting form failed!");
+        notifyService.showError("Failed to load towns", data);
 	});
+	
 	if($routeParams.adId){
-	var responsePromise = $http.get("http://softuni-ads.azurewebsites.net/api/user/ads/"+$routeParams.adId, {});
-        responsePromise.success(function(dataFromServer) {
-		  $scope.ad = dataFromServer;
-        });
-        responsePromise.error(function(data, status, headers, config) {
-          alert("Submitting form failed!");
-        });
+		var getAd = $http.get("http://softuni-ads.azurewebsites.net/api/user/ads/" + $routeParams.adId)
+			.success(function(dataFromServer) {
+				$scope.ad = dataFromServer;
+			})
+			.error(function(data, status, headers, config) {
+				notifyService.showError("Failed to load ad", data);
+			});
 	}
+	
 	$scope.publishAgain =  function(){
 		var responsePromise = $http.put("http://softuni-ads.azurewebsites.net/api/user/ads/publishagain/"+$routeParams.adId, {});
         responsePromise.success(function(dataFromServer) {
-         	$location.path( '/user/ads' );
-			console.log(dataFromServer);
+         	notifyService.showInfo("Ad resend for approving");
+			$location.path( '/user/ads' );
 		});
         responsePromise.error(function(data, status, headers, config) {
-			alert("Submitting form failed!");
+			notifyService.showError("Failed to publish ad", data);
 		});
 	}    
+	
 	$scope.deactivateAd =  function(){
 		var responsePromise = $http.put("http://softuni-ads.azurewebsites.net/api/user/ads/deactivate/"+$routeParams.adId, {});
         responsePromise.success(function(dataFromServer) {
-         	$location.path( '/user/ads' );
-			console.log(dataFromServer);
+			notifyService.showInfo("Ad deactivated");    
+			$location.path( '/user/ads' );
 		});
         responsePromise.error(function(data, status, headers, config) {
-			alert("Submitting form failed!");
+			notifyService.showError("Failed to deactivate ad", data);
 		});
 	}    
+	
 	$scope.deleteAd =  function(){
 		var responsePromise = $http.delete("http://softuni-ads.azurewebsites.net/api/user/ads/"+$routeParams.adId, {});
         responsePromise.success(function(dataFromServer) {
-         	$location.path( '/user' );
+         	notifyService.showInfo("Ad deleted");
+			$location.path( '/user/ads' );
 		});
         responsePromise.error(function(data, status, headers, config) {
-			alert("Submitting form failed!");
+			notifyService.showError("Failed to delete ad", data);
 		});
 	} 
 
-var dataObject = {};
-$(".image-box").html("<img src='" + dataObject.imageDataUrl + "'>");
+	var dataObject = {};
+	$(".image-box").html("<img src='" + dataObject.imageDataUrl + "'>");
 
 	$scope.fileSelected = function(fileInputField) {
-            //delete $scope.adData.imageDataUrl;
-            var file = fileInputField.files[0];
-            if (file.type.match(/image\/.*/)) {
-                var reader = new FileReader();
-                reader.onload = function() {
-                    dataObject.imageDataUrl = reader.result;
-					dataObject.changeimage = true;
-                    $(".image-box").html("<img src='" + reader.result + "'>");
-                };
-                reader.readAsDataURL(file);
+		var file = fileInputField.files[0];
+		if (file.type.match(/image\/.*/)) {
+			var reader = new FileReader();
+			reader.onload = function() {
+				dataObject.imageDataUrl = reader.result;
+				dataObject.changeimage = true;
+				$(".image-box").html("<img src='" + reader.result + "'>");
+			};
+			reader.readAsDataURL(file);
             } else {
                 $(".image-box").html("<p>File type not supported!</p>");
             }
-        }
+	}
 
-	
-	
-$scope.editAd =  function(){
+	$scope.editAd =  function(){
 		dataObject.title = $scope.ad.title;
-			dataObject.text = $scope.ad.text;
-			dataObject.categoryId = $scope.ad.categoryId;
-			dataObject.townId = $scope.ad.townId;
+		dataObject.text = $scope.ad.text;
+		dataObject.categoryId = $scope.ad.categoryId;
+		dataObject.townId = $scope.ad.townId;
 		var responsePromise = $http.put("http://softuni-ads.azurewebsites.net/api/user/ads/"+$routeParams.adId, dataObject);
         responsePromise.success(function(dataFromServer) {
-         	//$location.path( '/user' );
+         	notifyService.showInfo("Ad edited");
+			$location.path( '/user/ads' );
 		});
         responsePromise.error(function(data, status, headers, config) {
-			alert("Submitting form failed!");
+			notifyService.showError("Failed to edit ad", data);
 		});
 	}
 
@@ -144,32 +155,33 @@ $scope.editAd =  function(){
 		$scope.myForm = dataFromServer;
 	});
 	responsePromise.error(function(data, status, headers, config) {
-		alert("Submitting form failed!");
+		notifyService.showError("Failed to get user profile", data);
 	});
 	
 	submitTheForm = function(item, event) {
 		var responsePromisee = $http.put("http://softuni-ads.azurewebsites.net/api/user/profile", $scope.myForm, {});
-		responsePromisee	.success(function(dataFromServer, status, headers, config) {
+		responsePromisee.success(function(dataFromServer, status, headers, config) {
+			notifyService.showInfo("Profile edited");
+			$location.path('user/ads');
 		});
 		responsePromise.error(function(data, status, headers, config) {
-			alert("Submitting form failed!");
+			notifyService.showError("Failed to edit user profile", data);
 		});
-	}
-	//var pass = {};
-	changePass = function(item, event) {
-	password = {
-	oldPassword: $scope.pass.old,
-	newPassword: $scope.pass.new,
-	confirmPassword: $scope.pass.conf
 	}
 	
+	changePass = function(item, event) {
+		password = {
+			oldPassword: $scope.pass.old,
+			newPassword: $scope.pass.new,
+			confirmPassword: $scope.pass.conf
+		}
 		var responsePromisee = $http.put("http://softuni-ads.azurewebsites.net/api/user/changepassword", password, {});
 		responsePromisee.success(function(dataFromServer, status, headers, config) {
+			notifyService.showInfo("Password changed");
+			$location.path('user/ads');
 		});
 		responsePromise.error(function(data, status, headers, config) {
-			alert("Submitting form failed!");
+			notifyService.showError("Failed to change pass", data);
 		});
 	}
-
-
 });
