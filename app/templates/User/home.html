@@ -1,14 +1,3 @@
-<div class="col-md-3">
-	<div class="dialog-box" id="welcome">
-		<h1>Navigation</h1>
-		<input type="button" onclick="userSession.logout()" class="button" value="LogOut"/></br>
-		<a href="/#/user" class="button">Home</a></br>
-		<a href="/#/userAds" class="button" >My Ads</a></br>
-		<a href="/#/publish" class="button">Publish New Ad</a></br>
-		<a href="" class="button" >Edit Profile</a>
-	</div>
-</div>
-<div class="col-md-6">
 <pagination total-items="ads.numItems" ng-model="adsParams.startPage"  items-per-page="adsParams.pageSize" ng-change="reloadAds()"  max-size="9" boundary-links="true"></pagination>
 
 	<div class="dialog-box" ng-repeat="ad in data.ads | filter:filterBy | filter:filterByTown" style="width:100%">

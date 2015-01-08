@@ -1,14 +1,3 @@
-<div class="col-md-3">
-	<div class="dialog-box" id="welcome">
-		<h1>Navigation</h1>
-		<input type="button" onclick="userSession.logout()" class="button" value="LogOut"/></br>
-		<a href="/#/admin/home" class="button">Ads</a></br>
-		<a href="/#/admin/users/list" class="button" >Users</a></br>
-		<a href="/#/admin/categories/list" class="button">Categories</a></br>
-		<a href="/#/admin/towns/list" class="button" >Towns</a>
-	</div>
-</div>
-<div class="col-md-9">
 	<table id="phones">
 		<tr>
 			<th>Username</th>
@@ -29,4 +18,3 @@
 		</tr>
 	</table>
 <pagination total-items="ads.numItems" ng-model="adsParams.startPage"  items-per-page="adsParams.pageSize" ng-change="reloadAds()"  max-size="9" boundary-links="true"></pagination>
-</div>

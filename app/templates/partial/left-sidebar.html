@@ -38,3 +38,30 @@
         <li><a ng-click="logout()">Logout</a></li>
     </ul>
 </div>
+<div class="box">
+    <h2>Categories</h2>
+    <ul class="sidebar-menu">
+        <li class="special"
+            ng-class="{'selected' : selectedCategoryId == null}"
+            ng-click="categoryClicked(null)">
+            All
+        </li>
+        <li ng-click="statusClicked('Published')"
+            ng-class="{'selected' : selectedCategoryId == 'Published'}">
+			Published
+        </li>
+        <li ng-click="statusClicked('WaitingApproval')"
+            ng-class="{'selected' : selectedCategoryId == 'WaitingApproval'}">
+			WaitingApproval
+        </li>
+        <li ng-click="statusClicked('Inactive')"
+            ng-class="{'selected' : selectedCategoryId == 'Inactive'}">
+			Inactive
+        </li>
+        <li ng-click="statusClicked('Rejected')"
+            ng-class="{'selected' : selectedCategoryId == 'Rejected'}">
+			Rejected
+        </li>
+    </ul>
+</div>
+

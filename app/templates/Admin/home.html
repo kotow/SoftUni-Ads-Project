@@ -3,45 +3,6 @@
   max-size="9" boundary-links="true">
 </pagination>
 
-<div class="col-md-3">
-	<div class="box">
-		<h1>Navigation</h1>
-		<input type="button" onclick="userSession.logout()" class="button" value="LogOut"/></br>
-		<a href="/#/admin/home" class="button">Ads</a></br>
-		<a href="/#/admin/users/list" class="button" >Users</a></br>
-		<a href="/#/admin/categories/list" class="button">Categories</a></br>
-		<a href="/#/admin/towns/list" class="button" >Towns</a>
-	</div>
-	
-<div class="box">
-    <h2>Categories</h2>
-    <ul class="sidebar-menu">
-        <li class="special"
-            ng-class="{'selected' : selectedCategoryId == null}"
-            ng-click="categoryClicked(null)">
-            All
-        </li>
-        <li ng-click="statusClicked('Published')"
-            ng-class="{'selected' : selectedCategoryId == 'Published'}">
-			Published
-        </li>
-        <li ng-click="statusClicked('WaitingApproval')"
-            ng-class="{'selected' : selectedCategoryId == 'WaitingApproval'}">
-			WaitingApproval
-        </li>
-        <li ng-click="statusClicked('Inactive')"
-            ng-class="{'selected' : selectedCategoryId == 'Inactive'}">
-			Inactive
-        </li>
-        <li ng-click="statusClicked('Rejected')"
-            ng-class="{'selected' : selectedCategoryId == 'Rejected'}">
-			Rejected
-        </li>
-    </ul>
-</div>
-
-</div>
-<div class="col-md-9">
 	<div class="box" ng-repeat="ad in data.ads | filter:filterBy | filter:filterByTown" style="width:100%">
 			<h1>{{ad.title}}	{{ad.date | date:'dd-MMM-yyyy'}}</h1>
 			<img src="" ng-src="{{ad.imageDataUrl}}" style="width:30%"/>
@@ -60,4 +21,3 @@
 				<a href="#/admin/ads/delete/{{ad.id}}" class="button">Delete</a>
 			</div>
 	</div>
-</div>
