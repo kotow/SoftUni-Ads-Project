@@ -1,5 +1,5 @@
 <!-- Navigation box for anonymous site visitors -->
-<div ng-if="authService.isAnonymous()" class="box">
+<div ng-if="user.notLoggedUser()" class="box">
     <h2>Navigation</h2>
     <ul class="sidebar-menu">
         <li><a href="#/">Home</a></li>
@@ -9,14 +9,14 @@
 </div>
 
 <!-- Login / register box for anonymous site visitors  -->
-<div class="box" ng-if="authService.isAnonymous()">
+<div class="box" ng-if="user.notLoggedUser()">
     <p>To publish a new ad, please login.</p>
     <a href="#/login" class="button">Login</a>
     <a href="#/register" class="button">Register</a>
 </div>
 
 <!-- Navigation box for logged in normal users (not admins) -->
-<div ng-if="authService.isNormalUser()" class="box">
+<div ng-if="user.isLoggedUser()" class="box">
     <h2>Navigation</h2>
     <ul class="sidebar-menu">
         <li><a href="#/">Home</a></li>
@@ -28,7 +28,7 @@
 </div>
 
 <!-- Navigation box for logged in admins -->
-<div ng-if="authService.isAdmin()" class="box">
+<div ng-if="user.isAdmin()" class="box">
     <h2>Administrator</h2>
     <ul class="sidebar-menu">
         <li><a href="#/admin/ads">Ads</a></li>

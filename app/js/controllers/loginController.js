@@ -8,7 +8,7 @@ app.controller('loginController', function($scope, $http, $location, notifyServi
 
        var responsePromise = $http.post("http://softuni-ads.azurewebsites.net/api/user/login", dataObject, {});
        responsePromise.success(function(dataFromServer, status, headers, config) {
-		  userSession.login(dataFromServer);
+		  console.log(dataFromServer);userSession.login(dataFromServer);
 		  $scope.user = true;
 		  if(!dataFromServer.isAdmin){
 		  $location.path( '/user/ads' );} else $location.path( '/admin/home' )

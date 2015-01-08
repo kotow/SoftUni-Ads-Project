@@ -13,8 +13,8 @@
 </header>
 
 <div id='app-content'>
-    <div class='col-md-2 sidebar' ng-controller="LeftSidebarController">
-        <div ng-include="'templates/partial/left-sidebar.html'"></div>
+    <div class='col-md-2 sidebar'>
+        <div ng-include="'templates/partial/left-sidebar.html'" ng-controller="LeftSidebarController"></div>
     </div>
 
     <div class='col-md-8' ng-view>
@@ -42,7 +42,6 @@
 	<script src="/js/session.js"></script>
 	<script src="/js/services/publicData.js"></script>
 	<script src="/js/services/notifyService.js"></script>
-	<script src="/js/services/authService.js"></script>
 	
 	<script src="js/controllers/RightSidebarController.js"></script>
 	<script src="js/controllers/LeftSidebarController.js"></script>	

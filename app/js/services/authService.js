@@ -1,18 +1,14 @@
-'use strict';
-
 app.factory('authService',
-    function ($http, baseServiceUrl) {
+    function ($http) {
+	var baseServiceUrl = 'http://softuni-ads.azurewebsites.net/api/user/login';
         return {
-            login: function(userData, success, error) {
+            login: function(userData) {
                 var request = {
                     method: 'POST',
                     url: baseServiceUrl + '/api/user/login',
                     data: userData
                 };
-                $http(request).success(function(data) {
-                    sessionStorage['currentUser'] = JSON.stringify(data);
-                    success(data);
-                }).error(error);
+                $http(request)
             },
 
             register: function(userData, success, error) {
@@ -39,7 +35,7 @@ app.factory('authService',
             },
 
             isAnonymous : function() {
-                return sessionStorage['currentUser'] == undefined;
+                return true;//sessionStorage['currentUser'] == undefined;
             },
 
             isLoggedIn : function() {

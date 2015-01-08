@@ -10,6 +10,10 @@ var userSession = {
             return JSON.parse(sessionStorage['currentUser']);
         }
     },
+	isAdmin : function() {
+		var userData = JSON.parse(sessionStorage['currentUser']);
+		return userData.isAdmin;
+	},
     logout : function() {
         delete sessionStorage['currentUser'];
     }

@@ -4,21 +4,27 @@ app.controller('LeftSidebarController',
 		$scope.selectedStatus = status;
 		$rootScope.$broadcast("statusSelectionChanged", status);
     };
-	if(!userSession.getCurrentUser()){
-		$scope.guest = true;
-		$scope.user = false;
-		$scope.admin = false;
+	$scope.user = {
+    notLoggedUser : function() {
+        var userData = sessionStorage['currentUser'];
+        if (!userData) {
+            return true;
+        }
+		else return false;
+    },
+    isLoggedUser : function() {
+        var userData = sessionStorage['currentUser'];
+        if (userData && !userData.isAdmin) {
+            return true;
+        }
+		else return false;
+    },
+	isAdmin : function() {
+		var userData = JSON.parse(sessionStorage['currentUser']);
+        if (userData) {
+		return userData.isAdmin;
+        }
+		else return false;
 	}
-	
-	else if(userSession.getCurrentUser() && !userSession.getCurrentUser().isAdmin){
-		$scope.guest = false;
-		$scope.user = true;
-		$scope.admin = false;
-	}
-	else if(userSession.getCurrentUser() && userSession.getCurrentUser().isAdmin){
-		$scope.guest = false;
-		$scope.user = false;
-		$scope.admin = true;
-	}
-	console.log($scope.guest,$scope.user,$scope.admin)
+}
 });
