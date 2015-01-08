@@ -41,8 +41,8 @@
 </div>
 
 </div>
-<div class="col-md-6">
-	<div class="dialog-box" ng-repeat="ad in data.ads | filter:filterBy | filter:filterByTown" style="width:100%">
+<div class="col-md-9">
+	<div class="box" ng-repeat="ad in data.ads | filter:filterBy | filter:filterByTown" style="width:100%">
 			<h1>{{ad.title}}	{{ad.date | date:'dd-MMM-yyyy'}}</h1>
 			<img src="" ng-src="{{ad.imageDataUrl}}" style="width:30%"/>
 			<div>{{ad.text}}</div>
@@ -56,52 +56,8 @@
 			<div>
 				<a href class="button" ng-click="aprove(ad.id)">Approve</a>
 				<a href class="button" ng-click="reject(ad.id)">Reject</a>
-				<a href="#/admin/ads/edit/{{ad.id}}" class="button">Edit</a>
+				<a href="#/admin/ads/edit/{{ad.id}}" ng-click="getAdById(ad.id) "class="button">Edit</a>
 				<a href="#/admin/ads/delete/{{ad.id}}" class="button">Delete</a>
 			</div>
 	</div>
-</div>
-<div class="col-md-3">
-<div class="box">
-    <h2>Categories</h2>
-    <ul class="sidebar-menu">
-        <li class="special"
-            ng-class="{'selected' : selectedCategoryId == null}"
-            ng-click="categoryClicked(null)">
-            All
-        </li>
-        <li ng-repeat="category in categories"
-            ng-click="categoryClicked(category.id)"
-            ng-class="{'selected' : selectedCategoryId == category.id}">
-            {{category.name}}
-        </li>
-    </ul>
-</div>
-
-<div class="box">
-    <h2>Towns</h2>
-    <ul class="sidebar-menu">
-        <li class="special"
-            ng-class="{'selected' : selectedTownId == null}"
-            ng-click="townClicked(null)">
-            All
-        </li>
-        <li ng-repeat="town in towns"
-            ng-click="townClicked(town.id)"
-            ng-class="{'selected' : selectedTownId == town.id}">
-            {{town.name}}
-        </li>
-    </ul>
-</div>
-
-	Category:
-					<select ng-model="filterByTown.categoryId">
-						<option selected value="">All</option>
-						<option ng-repeat="cat in categories" value="{{cat.id}}">{{cat.name}}</option>
-					</select>
-					Town:
-					<select ng-model="filterBy.townId">
-					<option selected value="">All</option>
-						<option ng-repeat="town in towns" value="{{town.id}}">{{town.name}}</option>
-					</select>
 </div>

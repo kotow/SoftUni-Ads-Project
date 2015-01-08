@@ -15,9 +15,9 @@
 			<th>Categorie</th>
 			<th>Action</th>
 		</tr>
-		<tr ng-repeat="town in towns">
-			<td>{{town.id}}</td>
-			<td>{{town.username}}</td>
+		<tr ng-repeat="category in categories">
+			<td>{{category.id}}</td>
+			<td>{{category.username}}</td>
 			<td>	
 				<a href="#/admin/categories/edit/{{town.id}}">Edit</a>
 				<a href="#/admin/categories/delete/{{town.id}}">Delete</a>
