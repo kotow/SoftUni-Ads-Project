@@ -99,7 +99,7 @@ var app = angular.module('softUniApp', ['ngResource', 'ngRoute', 'ui.bootstrap.p
 	});
 	$routeProvider.when('/admin/users/list', {
 		templateUrl: 'templates/admin/users.html',
-		controller: 'AdminAllUsersController',
+		controller: 'AdminUsersController',
 		resolve: {adminRequired: adminRequired}
 	});
 	$routeProvider.when('/admin/categories/list', {
@@ -155,12 +155,12 @@ var app = angular.module('softUniApp', ['ngResource', 'ngRoute', 'ui.bootstrap.p
 	});
 	$routeProvider.when('/admin/users/edit/:userName', {
 		templateUrl: 'templates/admin/editUser.html',
-		controller: 'AdminEditUserController',
+		controller: 'AdminUsersController',
 		resolve: {adminRequired: adminRequired}
 	});
 	$routeProvider.when('/admin/users/delete/:userName', {
 		templateUrl: 'templates/admin/deleteUser.html',
-		controller: 'AdminDeleteUserController',
+		controller: 'AdminUsersController',
 		resolve: {adminRequired: adminRequired}
 	});
 	$routeProvider.otherwise({
