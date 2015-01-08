@@ -120,17 +120,17 @@ var app = angular.module('softUniApp', ['ngResource', 'ngRoute', 'ui.bootstrap.p
 	});
 	$routeProvider.when('/admin/towns/delete/:townId', {
 		templateUrl: 'templates/admin/deletetown.html',
-		controller: 'DeleteTownController',
+		controller: 'AdminTownsController',
 		resolve: {adminRequired: adminRequired}
 	});
 	$routeProvider.when('/admin/towns/edit/:townId', {
 		templateUrl: 'templates/admin/editTown.html',
-		controller: 'EditTownController',
+		controller: 'AdminTownsController',
 		resolve: {adminRequired: adminRequired}
 	});
 	$routeProvider.when('/admin/towns/add', {
 		templateUrl: 'templates/admin/addtown.html',
-		controller: 'AddTownController',
+		controller: 'AdminTownsController',
 		resolve: {adminRequired: adminRequired}
 	});
 	$routeProvider.when('/admin/categories/delete/:townId', {
@@ -150,7 +150,7 @@ var app = angular.module('softUniApp', ['ngResource', 'ngRoute', 'ui.bootstrap.p
 	});
 	$routeProvider.when('/admin/towns/list', {
 		templateUrl: 'templates/admin/towns.html',
-		controller: 'AdminAllTownsController',
+		controller: 'AdminTownsController',
 		resolve: {adminRequired: adminRequired}
 	});
 	$routeProvider.when('/admin/users/edit/:userName', {
