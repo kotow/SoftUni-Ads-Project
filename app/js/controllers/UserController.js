@@ -1,5 +1,4 @@
-app.controller('UserController', function($scope, $log, $http, $routeParams, $location, notifyService, $route) {	
-	$http.defaults.headers.common['Authorization'] = "Bearer " + userSession.getCurrentUser().access_token;
+app.controller('UserController', function($scope, $routeParams, $location, notifyService, $route, publicData, userData) {	
 	$scope.hideFilters = true;
 	$scope.adsParams = {
 		'startPage' : 1,
@@ -7,7 +6,7 @@ app.controller('UserController', function($scope, $log, $http, $routeParams, $lo
 	};
 	
 	$scope.reloadAds = function() {
-		var getUserAds = $http.get("http://softuni-ads.azurewebsites.net/api/user/ads?", {params: $scope.adsParams})
+		var getUserAds = userData.getAds($scope.adsParams);
 		.success(function(dataFromServer) {
 			$scope.data = dataFromServer;
 			$scope.ads = dataFromServer;
@@ -48,126 +47,111 @@ app.controller('UserController', function($scope, $log, $http, $routeParams, $lo
 			categoryId: $scope.publish.categoryId,
 			townId: $scope.publish.townId,
 		};
-		var responsePromise = $http.post("http://softuni-ads.azurewebsites.net/api/user/ads", adDetails); 
-		responsePromise.success(function(dataFromServer, status, headers, config) {
-			notifyService.showInfo("Ad published");
-			$location.path('user/ads');
-		});
-		responsePromise.error(function(data, status, headers, config) {
-			notifyService.showError("Failed to post ad", data);
-		});
+		var publish = userData.publish(adDetails) 
+			.success(function() {
+				notifyService.showInfo("Ad published");
+				$location.path('user/ads');
+			});
+			.error(function(data) {
+				notifyService.showError("Failed to post ad", data);
+			});
 	}
 	
-	var responsePromise = $http.get("http://softuni-ads.azurewebsites.net/api/categories", {});
-	responsePromise.success(function(dataFromServer) {
-		$scope.categories = dataFromServer;
-	});
-	responsePromise.error(function(data, status, headers, config) {
-		notifyService.showError("Failed to load categories", data);
-	});
+	var getCategories = publicData.getCategories
+		.success(function(dataFromServer) {
+			$scope.categories = dataFromServer;
+		});
+		.error(function(data, status, headers, config) {
+			notifyService.showError("Failed to load categories", data);
+		});
 		
-	var responsePromiseTowns = $http.get("http://softuni-ads.azurewebsites.net/api/towns", {});
-	responsePromiseTowns.success(function(dataFromServer) {
-		$scope.towns = dataFromServer;
-	});
-	responsePromiseTowns.error(function(data, status, headers, config) {
-        notifyService.showError("Failed to load towns", data);
-	});
+	var getTowns = publicData.getTowns
+		.success(function(dataFromServer) {
+			$scope.towns = dataFromServer;
+		});
+		.error(function(data) {
+			notifyService.showError("Failed to load towns", data);
+		});
 	
 	if($routeParams.adId){
-		var getAd = $http.get("http://softuni-ads.azurewebsites.net/api/user/ads/" + $routeParams.adId)
+		var getAd = userData.getAd($routeParams.adId)
 			.success(function(dataFromServer) {
 				$scope.ad = dataFromServer;
 			})
-			.error(function(data, status, headers, config) {
+			.error(function(data) {
 				notifyService.showError("Failed to load ad", data);
 			});
 	}
 	
 	$scope.publishAgain =  function(id){
-		var responsePromise = $http.put("http://softuni-ads.azurewebsites.net/api/user/ads/publishagain/" + id);
-        responsePromise.success(function(dataFromServer) {
-         	notifyService.showInfo("Ad resend for approving");
-			$route.reload();
-		});
-        responsePromise.error(function(data, status, headers, config) {
-			notifyService.showError("Failed to publish ad", data);
-		});
+		var publishAgain = userData.publishAgain(id)
+			.success(function(dataFromServer) {
+				notifyService.showInfo("Ad resend for approving");
+				$route.reload();
+			});
+			.error(function(data, status, headers, config) {
+				notifyService.showError("Failed to publish ad", data);
+			});
 	}    
 	
 	$scope.deactivateAd =  function(id){
-		var responsePromise = $http.put("http://softuni-ads.azurewebsites.net/api/user/ads/deactivate/" + id);
-        responsePromise.success(function(dataFromServer) {
-			notifyService.showInfo("Ad deactivated");    
-			$route.reload();
-		});
-        responsePromise.error(function(data, status, headers, config) {
-			notifyService.showError("Failed to deactivate ad", data);
-		});
+		var deactivate = userData.deactivate(id)
+			.success(function(dataFromServer) {
+				notifyService.showInfo("Ad deactivated");    
+				$route.reload();
+			})
+			.error(function(data, status, headers, config) {
+				notifyService.showError("Failed to deactivate ad", data);
+			});
 	}    
 	
 	$scope.deleteAd =  function(){
-		var responsePromise = $http.delete("http://softuni-ads.azurewebsites.net/api/user/ads/"+$routeParams.adId, {});
-        responsePromise.success(function(dataFromServer) {
-         	notifyService.showInfo("Ad deleted");
-			$location.path( '/user/ads' );
-		});
-        responsePromise.error(function(data, status, headers, config) {
-			notifyService.showError("Failed to delete ad", data);
-		});
+		var deleteAd = userData.deleteAd($routeParams.adId)
+			.success(function(dataFromServer) {
+				notifyService.showInfo("Ad deleted");
+				$location.path( '/user/ads' );
+			})
+			.error(function(data) {
+				notifyService.showError("Failed to delete ad", data);
+			});
 	} 
 
 	var dataObject = {};
 	$(".image-box").html("<img src='" + dataObject.imageDataUrl + "'>");
-
-	$scope.fileSelected = function(fileInputField) {
-		var file = fileInputField.files[0];
-		if (file.type.match(/image\/.*/)) {
-			var reader = new FileReader();
-			reader.onload = function() {
-				dataObject.imageDataUrl = reader.result;
-				dataObject.changeimage = true;
-				$(".image-box").html("<img src='" + reader.result + "'>");
-			};
-			reader.readAsDataURL(file);
-            } else {
-                $(".image-box").html("<p>File type not supported!</p>");
-            }
-	}
 
 	$scope.editAd =  function(){
 		dataObject.title = $scope.ad.title;
 		dataObject.text = $scope.ad.text;
 		dataObject.categoryId = $scope.ad.categoryId;
 		dataObject.townId = $scope.ad.townId;
-		var responsePromise = $http.put("http://softuni-ads.azurewebsites.net/api/user/ads/"+$routeParams.adId, dataObject);
-        responsePromise.success(function(dataFromServer) {
-         	notifyService.showInfo("Ad edited");
-			$location.path( '/user/ads' );
-		});
-        responsePromise.error(function(data, status, headers, config) {
-			notifyService.showError("Failed to edit ad", data);
-		});
+		var edit = userData.edit($routeParams.adId, dataObject)
+			.success(function(dataFromServer) {
+				notifyService.showInfo("Ad edited");
+				$location.path( '/user/ads' );
+			});
+			.error(function(data) {
+				notifyService.showError("Failed to edit ad", data);
+			});
 	}
 
 
-	var responsePromise = $http.get("http://softuni-ads.azurewebsites.net/api/user/profile", {});
-    responsePromise.success(function(dataFromServer, status, headers, config) {
-		$scope.myForm = dataFromServer;
-	});
-	responsePromise.error(function(data, status, headers, config) {
-		notifyService.showError("Failed to get user profile", data);
-	});
+	var getProfile = userData.getProfile
+		.success(function(dataFromServer) {
+			$scope.myForm = dataFromServer;
+		})
+		.error(function(data, status, headers, config) {
+			notifyService.showError("Failed to get user profile", data);
+		});
 	
 	submitTheForm = function(item, event) {
-		var responsePromisee = $http.put("http://softuni-ads.azurewebsites.net/api/user/profile", $scope.myForm, {});
-		responsePromisee.success(function(dataFromServer, status, headers, config) {
-			notifyService.showInfo("Profile edited");
-			$location.path('user/ads');
-		});
-		responsePromise.error(function(data, status, headers, config) {
-			notifyService.showError("Failed to edit user profile", data);
-		});
+		var editProfile = userData.editProfile($scope.myForm)
+			.success(function(dataFromServer) {
+				notifyService.showInfo("Profile edited");
+				$location.path('user/ads');
+			});
+			.error(function(data, status, headers, config) {
+				notifyService.showError("Failed to edit user profile", data);
+			});
 	}
 	
 	changePass = function(item, event) {
@@ -176,13 +160,13 @@ app.controller('UserController', function($scope, $log, $http, $routeParams, $lo
 			newPassword: $scope.pass.new,
 			confirmPassword: $scope.pass.conf
 		}
-		var responsePromisee = $http.put("http://softuni-ads.azurewebsites.net/api/user/changepassword", password, {});
-		responsePromisee.success(function(dataFromServer, status, headers, config) {
-			notifyService.showInfo("Password changed");
-			$location.path('user/ads');
-		});
-		responsePromise.error(function(data, status, headers, config) {
-			notifyService.showError("Failed to change pass", data);
-		});
+		var change = userData.changePassword(password)
+			.success(function(dataFromServer) {
+				notifyService.showInfo("Password changed");
+				$location.path('user/ads');
+			});
+			.error(function(data, status, headers, config) {
+				notifyService.showError("Failed to change pass", data);
+			});
 	}
 });
