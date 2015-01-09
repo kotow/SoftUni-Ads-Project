@@ -1,4 +1,4 @@
-app.controller('AdminUsersController', function($scope, $log, $http, $routeParams) {
+app.controller('AdminUsersController', function($scope, $location, $http, $routeParams, notifyService) {
 	$http.defaults.headers.common['Authorization'] = "Bearer " + userSession.getCurrentUser().access_token;	
 	$scope.adsParams = {
 		'startPage' : 1,
@@ -39,7 +39,14 @@ app.controller('AdminUsersController', function($scope, $log, $http, $routeParam
 				notifyService.showError("Failed to delete user", data);
 		});
 	}
-	
+	if($routeParams.userName){
+	var responsePromise = $http.get("http://softuni-ads.azurewebsites.net/api/admin/users", {});
+    responsePromise.success(function(dataFromServer, status, headers, config) {
+		for(var i=0; i<dataFromServer.users.length;i++){
+		if(dataFromServer.users[i].username == $routeParams.userName)
+		$scope.myForm = dataFromServer.users[i];
+}	});
+}
 	editUserProfile = function(item, event) {
 		var responsePromisee = $http.put("http://softuni-ads.azurewebsites.net/api/admin/user/"+$routeParams.userName, $scope.myForm, {});
 		responsePromisee.success(function(dataFromServer, status, headers, config) {

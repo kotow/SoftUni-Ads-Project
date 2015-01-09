@@ -14,11 +14,13 @@ app.controller('LeftSidebarController',
     isLoggedUser : function() {
         if (sessionStorage['currentUser']) {
 			var userData = JSON.parse(sessionStorage['currentUser']);
-			if(userData.isAdmin == false) {
+			if(userData.isAdmin == undefined) {
 				return true;
 			}
 		}
-		else return false;
+		else {
+			return true;
+		}
     },
 	isAdmin : function() {
         if (sessionStorage['currentUser']) {

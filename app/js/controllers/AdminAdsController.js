@@ -52,7 +52,6 @@ app.controller('AdminAdsController', function($scope, $route, $http, $rootScope,
 		.error(function(data, status, headers, config) {
 			notifyService.showError("Failed to load categories", data);
 		});
-		
 	var getTowns = $http.get("http://softuni-ads.azurewebsites.net/api/towns", {})
 		.success(function(dataFromServer) {
 			$scope.towns = dataFromServer;
@@ -102,11 +101,13 @@ app.controller('AdminAdsController', function($scope, $route, $http, $rootScope,
 		var getAdById = $http.get("http://softuni-ads.azurewebsites.net/api/admin/ads/" + $routeParams.adId, {})
 		.success(function(dataFromServer) {
 			$(".image-box").html("<img src='" + dataFromServer.imageDataUrl + "'>");
-			$scope.ad = dataFromServer;
+		
+			$scope.ad = dataFromServer;console.log($scope.ad)
         })
         .error(function(data, status, headers, config) {
 			notifyService.showError("Failed to load ad", data);
-        });    
+        });
+		
 	}	
 
 	$scope.editAd =  function(){

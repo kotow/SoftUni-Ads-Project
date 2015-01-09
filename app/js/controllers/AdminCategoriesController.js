@@ -1,4 +1,4 @@
-app.controller('AdminCategoriesController', function($scope, $log, $http, $routeParams, $location) {
+app.controller('AdminCategoriesController', function($scope, $log, $http, $routeParams, $location, notifyService) {
 	$http.defaults.headers.common['Authorization'] = "Bearer " + userSession.getCurrentUser().access_token;
 	$scope.adsParams = {
 		'startPage' : 1,

@@ -1,24 +1,25 @@
-<pagination total-items="ads.numItems" ng-model="adsParams.startPage"
-  items-per-page="adsParams.pageSize" ng-change="reloadAds()"
-  max-size="9" boundary-links="true">
-</pagination>
-
-<div class="box" ng-repeat="ad in data.ads">
-	<h1>{{ad.title}}</h1>
-	<div><strong>Date:</strong>{{ad.date | date:'dd-MMM-yyyy'}}</div>
-	<img src="" ng-src="{{ad.imageDataUrl}}" style="width:30%"/>
-	<div>{{ad.text}}</div>
-	<div><strong>Name:</strong> {{ad.ownerName}}</div>
-	<div><strong>Email:</strong> {{ad.ownerEmail}}</div>
-	<div><strong>Phone:</strong> {{ad.ownerPhone}}</div>
-	<div><strong>Username:</strong> {{ad.ownerUsername}}</div>
-	<div><strong>Town:</strong> {{ad.townName}}</div>
-	<div><strong>Category:</strong> {{ad.categoryName}}</div>
-	<div><strong>Status:</strong> {{ad.status}}</div>
-	<div>
-		<a href class="button" ng-click="aprove(ad.id)">Approve</a>
-		<a href class="button" ng-click="reject(ad.id)">Reject</a>
-		<a href="#/admin/ads/edit/{{ad.id}}" class="button">Edit</a>
-		<a href="#/admin/ads/delete/{{ad.id}}" class="button">Delete</a>
+<div class='col-md-9'>
+	<pagination total-items="ads.numItems" ng-model="adsParams.startPage" items-per-page="adsParams.pageSize" ng-change="reloadAds()" max-size="9" boundary-links="true"></pagination>
+	<div class="box" ng-repeat="ad in data.ads">
+		<h1>{{ad.title}}</h1>
+		<div><strong>Date:</strong>{{ad.date | date:'dd-MMM-yyyy'}}</div>
+		<img src="" ng-src="{{ad.imageDataUrl}}" style="width:30%"/>
+		<div>{{ad.text}}</div>
+		<div><strong>Name:</strong> {{ad.ownerName}}</div>
+		<div><strong>Email:</strong> {{ad.ownerEmail}}</div>
+		<div><strong>Phone:</strong> {{ad.ownerPhone}}</div>
+		<div><strong>Username:</strong> {{ad.ownerUsername}}</div>
+		<div><strong>Town:</strong> {{ad.townName}}</div>
+		<div><strong>Category:</strong> {{ad.categoryName}}</div>
+		<div><strong>Status:</strong> {{ad.status}}</div>
+		<div>
+			<a href class="button" ng-click="aprove(ad.id)" ng-show="ad.status == 'WaitingApproval'">Approve</a>
+			<a href class="button" ng-click="reject(ad.id)" ng-show="ad.status == 'WaitingApproval'">Reject</a>
+			<a href="#/admin/ads/edit/{{ad.id}}" class="button">Edit</a>
+			<a href="#/admin/ads/delete/{{ad.id}}" class="button">Delete</a>
+		</div>
 	</div>
+</div>
+<div class='col-md-3 sidebar' ng-controller="RightSidebarController">
+	<div ng-include="'templates/partial/right-sidebar.html'"></div>
 </div>
