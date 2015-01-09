@@ -6,7 +6,7 @@ app.controller('UserController', function($scope, $routeParams, $location, notif
 	};
 	
 	$scope.reloadAds = function() {
-		var getUserAds = userData.getAds($scope.adsParams);
+		var getUserAds = userData.getAds($scope.adsParams)
 		.success(function(dataFromServer) {
 			$scope.data = dataFromServer;
 			$scope.ads = dataFromServer;
@@ -31,6 +31,8 @@ app.controller('UserController', function($scope, $routeParams, $location, notif
 				var reader = new FileReader();
                 reader.onload = function() {
 					$scope.publish.imageDataUrl = reader.result;
+					dataObject.changeImage = true;
+					dataObject.imageDataUrl = reader.result;
                     $(".image-box").html("<img src='" + reader.result + "'>");
                 };
 				reader.readAsDataURL(file);
@@ -51,24 +53,24 @@ app.controller('UserController', function($scope, $routeParams, $location, notif
 			.success(function() {
 				notifyService.showInfo("Ad published");
 				$location.path('user/ads');
-			});
+			})
 			.error(function(data) {
 				notifyService.showError("Failed to post ad", data);
 			});
 	}
 	
-	var getCategories = publicData.getCategories
+	var getCategories = publicData.getCategories()
 		.success(function(dataFromServer) {
 			$scope.categories = dataFromServer;
-		});
+		})
 		.error(function(data, status, headers, config) {
 			notifyService.showError("Failed to load categories", data);
 		});
 		
-	var getTowns = publicData.getTowns
+	var getTowns = publicData.getTowns()
 		.success(function(dataFromServer) {
 			$scope.towns = dataFromServer;
-		});
+		})
 		.error(function(data) {
 			notifyService.showError("Failed to load towns", data);
 		});
@@ -76,7 +78,8 @@ app.controller('UserController', function($scope, $routeParams, $location, notif
 	if($routeParams.adId){
 		var getAd = userData.getAd($routeParams.adId)
 			.success(function(dataFromServer) {
-				$scope.ad = dataFromServer;
+			$scope.ad = dataFromServer;
+			$(".image-box").html("<img src='" + $scope.ad.imageDataUrl + "'>");
 			})
 			.error(function(data) {
 				notifyService.showError("Failed to load ad", data);
@@ -88,7 +91,7 @@ app.controller('UserController', function($scope, $routeParams, $location, notif
 			.success(function(dataFromServer) {
 				notifyService.showInfo("Ad resend for approving");
 				$route.reload();
-			});
+			})
 			.error(function(data, status, headers, config) {
 				notifyService.showError("Failed to publish ad", data);
 			});
@@ -117,8 +120,13 @@ app.controller('UserController', function($scope, $routeParams, $location, notif
 	} 
 
 	var dataObject = {};
-	$(".image-box").html("<img src='" + dataObject.imageDataUrl + "'>");
-
+	
+	$scope.removeImg = function(){
+		dataObject.changeImage = true;
+		dataObject.imageDataUrl = null;
+		$(".image-box").html("<img src=''>");
+	}
+	
 	$scope.editAd =  function(){
 		dataObject.title = $scope.ad.title;
 		dataObject.text = $scope.ad.text;
@@ -128,14 +136,14 @@ app.controller('UserController', function($scope, $routeParams, $location, notif
 			.success(function(dataFromServer) {
 				notifyService.showInfo("Ad edited");
 				$location.path( '/user/ads' );
-			});
+			})
 			.error(function(data) {
 				notifyService.showError("Failed to edit ad", data);
 			});
 	}
 
 
-	var getProfile = userData.getProfile
+	var getProfile = userData.getProfile()
 		.success(function(dataFromServer) {
 			$scope.myForm = dataFromServer;
 		})
@@ -148,7 +156,7 @@ app.controller('UserController', function($scope, $routeParams, $location, notif
 			.success(function(dataFromServer) {
 				notifyService.showInfo("Profile edited");
 				$location.path('user/ads');
-			});
+			})
 			.error(function(data, status, headers, config) {
 				notifyService.showError("Failed to edit user profile", data);
 			});
@@ -164,7 +172,7 @@ app.controller('UserController', function($scope, $routeParams, $location, notif
 			.success(function(dataFromServer) {
 				notifyService.showInfo("Password changed");
 				$location.path('user/ads');
-			});
+			})
 			.error(function(data, status, headers, config) {
 				notifyService.showError("Failed to change pass", data);
 			});

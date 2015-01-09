@@ -12,7 +12,7 @@ app.controller('AdminTownsController', function($scope, $log, $http, $routeParam
 			$scope.ads = dataFromServer;
 		})
 		.error(function(data, status, headers, config) {
-			alert("Submitting form failed!");
+			notifyService.showError("Failed to load towns", data);
 		});
 	};
 
@@ -30,10 +30,11 @@ app.controller('AdminTownsController', function($scope, $log, $http, $routeParam
 	deleteTown = function(){
 		var responsePromise = $http.delete("http://softuni-ads.azurewebsites.net/api/admin/towns/"+$routeParams.townId)
 			.success(function(dataFromServer) {
+			notifyService.showInfo("Town deleted successful");
 			$location.path( '/admin/towns/list' );
 			})
 			.error(function(data, status, headers, config) {
-				alert("Submitting form failed!");
+				notifyService.showError("Failed to delete town", data);
 			});
 	};    
 	 
@@ -41,10 +42,11 @@ app.controller('AdminTownsController', function($scope, $log, $http, $routeParam
 		var town = {name:$scope.name};
 		var responsePromise = $http.post("http://softuni-ads.azurewebsites.net/api/admin/towns/", town);
         responsePromise.success(function(dataFromServer) {
+			notifyService.showInfo("Town created successful");
          	$location.path( '/admin/home' );
 		});
         responsePromise.error(function(data, status, headers, config) {
-			alert("Submitting form failed!");
+			notifyService.showError("Failed to create town", data);
 		});
 	};   
 	
@@ -54,10 +56,11 @@ app.controller('AdminTownsController', function($scope, $log, $http, $routeParam
 	};
 		var responsePromise = $http.put("http://softuni-ads.azurewebsites.net/api/admin/towns/"+$routeParams.townId, town);
 		responsePromise.success(function(dataFromServer) {
+			notifyService.showInfo("Town edited successful");
 			$location.path( '/admin/towns/list' );
 		});
         responsePromise.error(function(data, status, headers, config) {
-			alert("Submitting form failed!");
+			notifyService.showError("Failed to edit town", data);
 		});
 	}    
 

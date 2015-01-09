@@ -1,9 +1,8 @@
 app.controller('loginController', function($scope, $http, $location, notifyService, $route) {
-	$scope.myForm = {};
-    $scope.myForm.submitTheForm = function(item, event) {
+    $scope.login = function(item, event) {
        var dataObject = {
-	   username: $scope.myForm.username,
-	   password:$scope.myForm.password,
+	   username: $scope.username,
+	   password:$scope.password,
 	   };
 
        var responsePromise = $http.post("http://softuni-ads.azurewebsites.net/api/user/login", dataObject, {});

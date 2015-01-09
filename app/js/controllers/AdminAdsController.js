@@ -1,4 +1,4 @@
-app.controller('AdminAdsController', function($scope, $log, $http, $rootScope, $routeParams, $location) {
+app.controller('AdminAdsController', function($scope, $route, $http, $rootScope, $routeParams, $location, notifyService) {
 	$http.defaults.headers.common['Authorization'] = "Bearer " + userSession.getCurrentUser().access_token;
 
 	$scope.adsParams = {
@@ -6,23 +6,6 @@ app.controller('AdminAdsController', function($scope, $log, $http, $rootScope, $
 		'pageSize' : 5
 	};
     
-	$scope.categoryClicked = function(clickedCategoryId) {
-		$scope.selectedCategoryId = clickedCategoryId;
-		$rootScope.$broadcast("categorySelectionChanged", clickedCategoryId);
-		$scope.reloadAds();
-	};
-	
-	$scope.statusClicked = function(clickedCategoryId) {
-		$scope.selectedCategoryId = clickedCategoryId;
-		$rootScope.$broadcast("statusSelectionChanged", clickedCategoryId);
-		$scope.reloadAds();
-	};
-
-	$scope.townClicked = function(clickedTownId) {
-		$scope.selectedTownId = clickedTownId;
-		$rootScope.$broadcast("townSelectionChanged", clickedTownId);
-	};
-	  
 	$scope.$on("categorySelectionChanged", function(event, selectedCategoryId) {
 		$scope.adsParams.categoryId = selectedCategoryId;
 		$scope.adsParams.startPage = 1;
@@ -47,7 +30,7 @@ app.controller('AdminAdsController', function($scope, $log, $http, $rootScope, $
 			$scope.ads = dataFromServer;
 		})
 		.error(function(data, status, headers, config) {
-			alert("Submitting form failed!");
+			notifyService.showError("Failed to load ads", data);
 		});
 
 	$scope.reloadAds = function() {
@@ -67,7 +50,7 @@ app.controller('AdminAdsController', function($scope, $log, $http, $rootScope, $
 			$scope.categories = dataFromServer;
 		})
 		.error(function(data, status, headers, config) {
-			alert("Submitting form failed!");
+			notifyService.showError("Failed to load categories", data);
 		});
 		
 	var getTowns = $http.get("http://softuni-ads.azurewebsites.net/api/towns", {})
@@ -75,24 +58,28 @@ app.controller('AdminAdsController', function($scope, $log, $http, $rootScope, $
 			$scope.towns = dataFromServer;
 		})
 		.error(function(data, status, headers, config) {
-			alert("Submitting form failed!");
+			notifyService.showError("Failed to load towns", data);
 		});
 	   
 	$scope.aprove = function(id){
 		aproveAd = $http.put("http://softuni-ads.azurewebsites.net/api/admin/ads/approve/"+id)
 		.success(function(dataFromServer) {
+			notifyService.showInfo("Ad approved successful");
+			$route.reload();
 		})
 		.error(function(data, status, headers, config) {
-			alert("Submitting form failed!");
+			notifyService.showError("Failed to approve ad", data);
 		});
 	}
 	
 	$scope.reject = function(id){
 		rejectAd = $http.put("http://softuni-ads.azurewebsites.net/api/admin/ads/reject/"+id)
 		.success(function(dataFromServer) {
+			notifyService.showInfo("Ad rejected successful");
+			$route.reload();
 		})
 		.error(function(data, status, headers, config) {
-			alert("Submitting form failed!");
+			notifyService.showError("Failed to reject ad", data);
 		});
 	}
 
@@ -118,7 +105,7 @@ app.controller('AdminAdsController', function($scope, $log, $http, $rootScope, $
 			$scope.ad = dataFromServer;
         })
         .error(function(data, status, headers, config) {
-          alert("Submitting form failed!");
+			notifyService.showError("Failed to load ad", data);
         });    
 	}	
 
@@ -131,20 +118,22 @@ app.controller('AdminAdsController', function($scope, $log, $http, $rootScope, $
 		};
 		var responsePromise = $http.put("http://softuni-ads.azurewebsites.net/api/admin/ads/"+$routeParams.adId, dataObject);
         responsePromise.success(function(dataFromServer) {
-         	$location.path( '/admin/home' );
+         	notifyService.showInfo("Ad edited");
+			$location.path( '/admin/home' );
 		});
         responsePromise.error(function(data, status, headers, config) {
-			alert("Submitting form failed!");
+			notifyService.showError("Failed to edit ad", data);
 		});
 	}
 
 		$scope.deleteAd =  function(){
-		var responsePromise = $http.delete("http://softuni-ads.azurewebsites.net/api/admin/ads/"+$routeParams.adId, {});
-        responsePromise.success(function(dataFromServer) {
-         	$location.path( '/admin/home' );
+			var responsePromise = $http.delete("http://softuni-ads.azurewebsites.net/api/admin/ads/"+$routeParams.adId, {});
+			responsePromise.success(function(dataFromServer) {
+			notifyService.showInfo("Ad deleted");
+			$location.path( '/admin/home' );
 		});
         responsePromise.error(function(data, status, headers, config) {
-			alert("Submitting form failed!");
+			notifyService.showError("Failed to delelete ad", data);
 		});
 	}    
 

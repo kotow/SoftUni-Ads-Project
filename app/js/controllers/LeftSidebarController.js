@@ -6,22 +6,23 @@ app.controller('LeftSidebarController',
     };
 	$scope.user = {
     notLoggedUser : function() {
-        var userData = sessionStorage['currentUser'];
-        if (!userData) {
+        if (!sessionStorage['currentUser']) {
             return true;
         }
 		else return false;
     },
     isLoggedUser : function() {
-        var userData = sessionStorage['currentUser'];
-        if (userData && userData.isAdmin == false) {
-            return true;
-        }
+        if (sessionStorage['currentUser']) {
+			var userData = JSON.parse(sessionStorage['currentUser']);
+			if(userData.isAdmin == false) {
+				return true;
+			}
+		}
 		else return false;
     },
 	isAdmin : function() {
+        if (sessionStorage['currentUser']) {
 		var userData = JSON.parse(sessionStorage['currentUser']);
-        if (userData) {
 		return userData.isAdmin;
         }
 		else return false;

@@ -11,7 +11,7 @@ app.controller('AdminCategoriesController', function($scope, $log, $http, $route
 				$scope.ads = dataFromServer;
 			})
 			.error(function(data, status, headers, config) {
-				alert("Submitting form failed!");
+				notifyService.showError("Failed to load categories", data);
 			});
       };
 
@@ -29,10 +29,11 @@ app.controller('AdminCategoriesController', function($scope, $log, $http, $route
 	deleteCategory = function() {
 		var deleteCat = $http.delete("http://softuni-ads.azurewebsites.net/api/admin/categories/" + $routeParams.categoryId)
 			.success(function(dataFromServer) {
+				notifyService.showInfo("Category deleted successful");
 				$location.path( '/admin/categories/list' );
 			})
 			.error(function(data, status, headers, config) {
-				alert("Submitting form failed!");
+				notifyService.showError("Failed to delete category", data);
 			});
 	}
     
@@ -42,10 +43,11 @@ app.controller('AdminCategoriesController', function($scope, $log, $http, $route
 		};
 		var editCat = $http.put("http://softuni-ads.azurewebsites.net/api/admin/categories/" + $routeParams.categoryId, category)
 			.success(function(dataFromServer) {
+				notifyService.showInfo("Category edited successful");
 				$location.path( '/admin/categories/list' );
 			})
 			.error(function(data, status, headers, config) {
-				alert("Submitting form failed!");
+				notifyService.showError("Failed to edit category", data);
 			});
 	}    
 
@@ -55,10 +57,11 @@ app.controller('AdminCategoriesController', function($scope, $log, $http, $route
 		};
 		var createCat = $http.post("http://softuni-ads.azurewebsites.net/api/admin/categories/", category)
 			.success(function(dataFromServer) {
+				notifyService.showInfo("Category created successful");
 				$location.path( '/admin/categories/list' );
 			})
 			.error(function(data, status, headers, config) {
-				alert("Submitting form failed!");
+				notifyService.showError("Failed to create category", data);
 			});
 	}    
 
