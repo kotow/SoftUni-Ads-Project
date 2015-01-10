@@ -1,6 +1,6 @@
 <div class="col-md-9">
 	<pagination total-items="ads.numItems" ng-model="adsParams.startPage" items-per-page="adsParams.pageSize" ng-change="reloadAds()" max-size="9" boundary-links="true"></pagination>
-	<div class="box" ng-repeat="ad in data.ads" style="width:100%">
+	<div class="box" ng-repeat="ad in data.ads">
 		<h1>{{ad.title}}</h1>
 		<div><strong>Date:</strong>{{ad.date | date:'dd-MMM-yyyy'}}</div>
 		<img ng-src="{{ad.imageDataUrl}}" style="width:30%"/>

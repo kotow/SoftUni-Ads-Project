@@ -38,7 +38,7 @@
         <li><a ng-click="logout()">Logout</a></li>
     </ul>
 </div>
-<div class="box">
+<div class="box" ng-if="user.isLoggedUser() || user.isAdmin()">
     <h2>Status</h2>
     <ul class="sidebar-menu">
         <li class="special"

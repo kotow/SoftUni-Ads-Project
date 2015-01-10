@@ -3,11 +3,11 @@
 	<form>
 		<p>
 			<label for="username">Title:</label>
-			<input ng-model="ad.title" type="text" id="title" ng-value="ad.title"/>
+			<input ng-model="ad.title" type="text" id="title" ng-value="ad.title" required="required" />
 		</p>
 		<p>
 			<label for="password">Text:</label>
-			<textarea ng-model="ad.text" id="text"></textarea>
+			<textarea ng-model="ad.text" id="text" required="required"></textarea>
 		</p>	
 		<p>
 			<label for="image">Image:</label>
@@ -26,7 +26,7 @@
 				</select>
 		</p>
 		<p class="buttons">
-			<a href ng-click="editAd()" class="button">Edit</a>
+			<input type="submit" ng-click="editAd()" class="button" value="Edit"/>
 			<a href="/user/ads"  class="button">Cancel</a>
 		</p>
 	</form>

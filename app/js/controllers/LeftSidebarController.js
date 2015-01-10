@@ -19,7 +19,7 @@ app.controller('LeftSidebarController',
 			}
 		}
 		else {
-			return true;
+			return false;
 		}
     },
 	isAdmin : function() {

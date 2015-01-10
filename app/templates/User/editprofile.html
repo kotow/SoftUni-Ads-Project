@@ -3,15 +3,15 @@
 	<form>
 		<p>
 			<label for="fullName">Full Name:</label>
-			<input ng-model="myForm.name" type="text" id="fullName" />
+			<input ng-model="myForm.name" type="text" id="fullName" required="required" />
 		</p>
 		<p>
 			<label for="fullName">Email:</label>
-			<input ng-model="myForm.email" type="text" id="fullName" />
+			<input ng-model="myForm.email" type="text" id="fullName" required="required" />
 		</p>
 		<p>
 			<label for="fullName">Phone:</label>
-			<input ng-model="myForm.phoneNumber" type="text" id="fullName" />
+			<input ng-model="myForm.phoneNumber" type="text" id="fullName" required="required" />
 		</p>
 		<p>
 			<label for="fullName">Town:</label>
@@ -20,7 +20,7 @@
 			</select>
 		</p>
 		<p class="buttons">
-			<a href onclick="submitTheForm()" class="button">Edit</a>
+			<input type="submit" onclick="submitTheForm()" class="button" value="Edit" />
 			<a href="/#/" class="link">Cancel</a>
 		</p>
 	</form>
@@ -30,18 +30,18 @@
 	<form>
 		<p>
 			<label for="password">Old password:</label>
-			<input ng-model="pass.old" type="password" id="password" />
+			<input ng-model="pass.old" type="password" id="password"  required="required"/>
 		</p>
 		<p>
 			<label for="password">New password:</label>
-			<input ng-model="pass.new" type="password" id="password" />
+			<input ng-model="pass.new" type="password" id="password"  required="required"/>
 		</p>
 		<p>
 			<label for="password">Confirm password:</label>
-			<input ng-model="pass.conf" type="password" id="password" />
+			<input ng-model="pass.conf" type="password" id="password"  required="required"/>
 		</p>
 		<p class="buttons">
-			<a href onclick="changePass()" class="button">Change password</a>
+			<input type="submit" onclick="changePass()" class="button" value="Change password"/>
 			<a href="/#/user/ads" class="link">Cancel</a>
 		</p>
 	</form>

@@ -3,19 +3,19 @@
 <form>
 	<p>
 		<label for="userName">Username:</label>
-		<input value="{{myForm.username}}" type="text" disabled id="fullName" />
+		<input value="{{myForm.username}}" type="text" disabled id="fullName" required="required" />
 	</p>
 	<p>
 		<label for="fullName">Full Name:</label>
-		<input ng-model="myForm.name" type="text" id="fullName" />
+		<input ng-model="myForm.name" type="text" id="fullName"  required="required"/>
 	</p>
 	<p>
 		<label for="fullName">Email:</label>
-		<input ng-model="myForm.email" type="text" id="fullName" />
+		<input ng-model="myForm.email" type="text" id="fullName"  required="required"/>
 	</p>
 	<p>
 		<label for="fullName">Phone:</label>
-		<input ng-model="myForm.phoneNumber" type="text" id="fullName" />
+		<input ng-model="myForm.phoneNumber" type="text" id="fullName"  required="required"/>
 	</p>
 	<p>
 		<select ng-model="myForm.townId">
@@ -24,10 +24,11 @@
 
 	</p>
 	<p>
-		<input type="checkbox" ng-model="myForm.isAdmin" ng-checked="myForm.isAdmin">
+		<input type="checkbox" id="admin" ng-model="myForm.isAdmin" ng-checked="myForm.isAdmin">
+		<label for="admin">Is admin</label>
 	</p>
 	<p class="buttons">
-		<a href onclick="editUserProfile()" class="button">Edit</a>
+		<input type="submit" onclick="editUserProfile()" class="button" value="Edit"/>
 		<a href="/#/admin/home" class="link">Cancel</a>
 	</p>
 </form>

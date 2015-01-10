@@ -3,15 +3,16 @@
 	<form>
 		<p>
 			<label for="username">Title:</label>
-			<input ng-model="ad.title" type="text" id="title" ng-value="ad.title"/>
+			<input ng-model="ad.title" type="text" id="title" ng-value="ad.title" required="required" />
 		</p>
 		<p>
 			<label for="password">Text:</label>
-			<textarea ng-model="ad.text" id="text"></textarea>
+			<textarea ng-model="ad.text" id="text" required="required" ></textarea>
 		</p>	
 		<p>
 			<label for="image">Image:</label>
 			<input type="file" id="image" ng-model="ad.imageDataUrl" onchange="angular.element(this).scope().fileSelected(this)" />
+			<input type="button" class="button" ng-click="removeImg()" value="Remove image" />
 			<div class="image-box"></div>
 		</p>
 		<p>
@@ -36,7 +37,7 @@
 		</p>
 		<p class="buttons">
 			<a href ng-click="editAd()" class="button">Edit</a>
-			<a href="/admin/home"  class="button">Cancel</a>
+			<a href="#/admin/home"  class="button">Cancel</a>
 		</p>
 	</form>
 </div>

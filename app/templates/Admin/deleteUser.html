@@ -21,11 +21,10 @@
 		<select ng-model="myForm.townId" disabled>
 			<option ng-repeat="town in towns" value="{{town.id}}">{{town.name}}</option>
 		</select>
-
 	</p>
 	<p class="buttons">
 		<a href onclick="deleteUser()" class="button">Edit</a>
-		<a href="/#/" class="link">Cancel</a>
+		<a href="/#/admin/users/list" class="link">Cancel</a>
 	</p>
 </form>
 

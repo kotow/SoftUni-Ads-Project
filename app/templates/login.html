@@ -3,14 +3,14 @@
 	<form>
 	<p>
 		<label for="username">Username:</label>
-		<input required ng-model="username" type="text" id="username" />
+		<input required="required" ng-model="username" type="text" id="username" />
 	</p>
 	<p>
 		<label for="password">Password:</label>
-		<input ng-model="password" type="password" required id="password" />
+		<input ng-model="password" type="password" required="required" id="password" />
 	</p>
 	<p class="buttons">
-		<a href  ng-click="login()" class="button">Login</a>
+		<input type="submit" ng-click="login()" class="button" value="Login" />
 		<a href="/#/register" class="link">Register</a>
 	<p>
 </div>

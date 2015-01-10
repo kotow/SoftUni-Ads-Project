@@ -1,5 +1,4 @@
-app.controller('AdminAdsController', function($scope, $route, $http, $rootScope, $routeParams, $location, notifyService) {
-	$http.defaults.headers.common['Authorization'] = "Bearer " + userSession.getCurrentUser().access_token;
+app.controller('AdminAdsController', function($scope, $route, $rootScope, $routeParams, $location, notifyService, adminData, publicData) {
 
 	$scope.adsParams = {
 		'startPage' : 1,
@@ -24,44 +23,35 @@ app.controller('AdminAdsController', function($scope, $route, $http, $rootScope,
 		$scope.reloadAds();
 	});
 
-	var getAds = $http.get("http://softuni-ads.azurewebsites.net/api/admin/ads?", {params:$scope.adsParams})
+	$scope.reloadAds = function() {
+		adminData.getAds($scope.adsParams)
 		.success(function(dataFromServer) {
 			$scope.data = dataFromServer;
 			$scope.ads = dataFromServer;
 		})
 		.error(function(data, status, headers, config) {
-			notifyService.showError("Failed to load ads", data);
+			notifyService.showError("Load ads failed", data);
 		});
-
-	$scope.reloadAds = function() {
-		var getAds = $http.get("http://softuni-ads.azurewebsites.net/api/admin/ads?", {params:$scope.adsParams})
-			.success(function(dataFromServer) {
-				$scope.data = dataFromServer;
-				$scope.ads = dataFromServer;
-			})
-			.error(function(data, status, headers, config) {
-				notifyService.showError("Load ads failed", data);
-			});
 	};
 	$scope.reloadAds();
 	
-	var getCategories = $http.get("http://softuni-ads.azurewebsites.net/api/categories", {})
-		.success(function(dataFromServer) {
-			$scope.categories = dataFromServer;
-		})
-		.error(function(data, status, headers, config) {
-			notifyService.showError("Failed to load categories", data);
-		});
-	var getTowns = $http.get("http://softuni-ads.azurewebsites.net/api/towns", {})
-		.success(function(dataFromServer) {
-			$scope.towns = dataFromServer;
-		})
-		.error(function(data, status, headers, config) {
-			notifyService.showError("Failed to load towns", data);
-		});
+	publicData.getCategories()
+	.success(function(dataFromServer) {
+		$scope.categories = dataFromServer;
+	})
+	.error(function(data, status, headers, config) {
+		notifyService.showError("Failed to load categories", data);
+	});
+	publicData.getTowns()
+	.success(function(dataFromServer) {
+		$scope.towns = dataFromServer;
+	})
+	.error(function(data, status, headers, config) {
+		notifyService.showError("Failed to load towns", data);
+	});
 	   
 	$scope.aprove = function(id){
-		aproveAd = $http.put("http://softuni-ads.azurewebsites.net/api/admin/ads/approve/"+id)
+		adminData.approveAd(id)
 		.success(function(dataFromServer) {
 			notifyService.showInfo("Ad approved successful");
 			$route.reload();
@@ -72,7 +62,7 @@ app.controller('AdminAdsController', function($scope, $route, $http, $rootScope,
 	}
 	
 	$scope.reject = function(id){
-		rejectAd = $http.put("http://softuni-ads.azurewebsites.net/api/admin/ads/reject/"+id)
+		adminData.rejectAd(id)
 		.success(function(dataFromServer) {
 			notifyService.showInfo("Ad rejected successful");
 			$route.reload();
@@ -98,10 +88,9 @@ app.controller('AdminAdsController', function($scope, $route, $http, $rootScope,
         }
 
 	if ($routeParams.adId !== undefined) {
-		var getAdById = $http.get("http://softuni-ads.azurewebsites.net/api/admin/ads/" + $routeParams.adId, {})
+		adminData.getAdById($routeParams.adId)
 		.success(function(dataFromServer) {
-			$(".image-box").html("<img src='" + dataFromServer.imageDataUrl + "'>");
-		
+			$(".image-box").html("<img src='" + dataFromServer.imageDataUrl + "'>");		
 			$scope.ad = dataFromServer;console.log($scope.ad)
         })
         .error(function(data, status, headers, config) {
@@ -109,7 +98,13 @@ app.controller('AdminAdsController', function($scope, $route, $http, $rootScope,
         });
 		
 	}	
-
+	
+	$scope.removeImg = function(){
+		$scope.ad.changeImage = true;
+		$scope.ad.imageDataUrl = null;
+		$(".image-box").html("<img src=''>");
+	}
+	
 	$scope.editAd =  function(){
 		var dataObject = {
 			title: $scope.ad.title,
@@ -117,24 +112,24 @@ app.controller('AdminAdsController', function($scope, $route, $http, $rootScope,
 			categoryId: $scope.ad.categoryId,
 			townId: $scope.ad.townId,
 		};
-		var responsePromise = $http.put("http://softuni-ads.azurewebsites.net/api/admin/ads/"+$routeParams.adId, dataObject);
-        responsePromise.success(function(dataFromServer) {
+		adminData.editAd($routeParams.adId, dataObject)
+        .success(function(dataFromServer) {
          	notifyService.showInfo("Ad edited");
 			$location.path( '/admin/home' );
-		});
-        responsePromise.error(function(data, status, headers, config) {
+		})
+        .error(function(data, status, headers, config) {
 			notifyService.showError("Failed to edit ad", data);
 		});
 	}
 
-		$scope.deleteAd =  function(){
-			var responsePromise = $http.delete("http://softuni-ads.azurewebsites.net/api/admin/ads/"+$routeParams.adId, {});
-			responsePromise.success(function(dataFromServer) {
+	$scope.deleteAd =  function(){
+		adminData.deleteAd($routeParams.adId)
+		.success(function(dataFromServer) {
 			notifyService.showInfo("Ad deleted");
 			$location.path( '/admin/home' );
-		});
-        responsePromise.error(function(data, status, headers, config) {
-			notifyService.showError("Failed to delelete ad", data);
+		})
+        .error(function(data, status, headers, config) {
+			notifyService.showError("Failed to delete ad", data);
 		});
 	}    
 

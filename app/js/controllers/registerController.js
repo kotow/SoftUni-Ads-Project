@@ -1,4 +1,4 @@
-app.controller('registerController', function($scope, $http, $location) {
+app.controller('registerController', function($scope, $http, $location, notifyService) {
 $scope.hideFilter = true;       
 
 	$scope.myForm = {};
@@ -13,13 +13,13 @@ $scope.hideFilter = true;
 	   townId:$scope.myForm.townId
 	   };
 
-       var responsePromise = $http.post("http://softuni-ads.azurewebsites.net/api/user/register", dataObject, {});
+       var responsePromise = $http.post("http://softuni-ads.azurewebsites.net/api/user/register", dataObject);
        responsePromise.success(function(dataFromServer, status, headers, config) {
 		  userSession.login(dataFromServer);
-		  $location.path( '/user' );
+		  $location.path( '/user/ads' );
        });
         responsePromise.error(function(data, status, headers, config) {
-          alert("Submitting form failed!");
+          notifyService.showError("Fail to register", data)
        });
 	}
 	var responsePromiseTowns = $http.get("http://softuni-ads.azurewebsites.net/api/towns", {});
